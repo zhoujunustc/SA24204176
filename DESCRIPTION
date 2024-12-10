@@ -11,7 +11,7 @@ Description: Simultaneously finding multiple influential variables and
     about mirror (Gaussian mirror, data splitting and its multiple version) 
     to select features and control FDR at any nominal level.
 License: GPL (>= 2)
-Imports: Rcpp, knitr, stats, MASS, tree, boot, bootstrap, DAAG, parallel, microbenchmark, GM, DSfdr, glmnet
+Imports: Rcpp, knitr, stats, MASS, tree, boot, bootstrap, DAAG, parallel, microbenchmark, glmnet
 Romotes: BioAlgs/GM, Jeremy690/DSfdr/DSfdr
 Suggests: rmarkdown
 VignetteBuilder: knitr
