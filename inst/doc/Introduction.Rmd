@@ -1,0 +1,240 @@
+---
+title: "Introduction to my R package"
+author: "Jun Zhou"
+date: "2024-12-02"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to my R package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Mirror
+  
+Simultaneously finding multiple influential variables and controlling the false discovery rate (FDR) for linear regression models is a fundamental problem. For the linear regression model $y = x_1'\beta_1 + \ldots + x_p'\beta_p + \varepsilon$, we are interested in testing $p$ hypotheses: $H_j: \beta_j =0$ for $j=1,\ldots, p$, simultaneously and finding a statistical rule to decide which hypotheses should be rejected. Let $S_0\subset\{1, 2,\ldots,p\}$ index the set of “null” predictors, i.e., those with $\beta_j =0$; and $S_1 = S_0^c$ indexes the set of relevant predictors. Let $\hat S_1$ be the set selected based on a statistical rule. The FDR for this statistical rule is defined as
+$$FDR = \mathbb{E}[FDP], \quad FDP=\frac{\#\{i|i\in S_0,i\in \hat S_1\}}{\#\{i|i\in\hat S_1\}\vee 1.}$$
+The task is to controll the FDR at a designated level, say q.
+
+
+Making mirror is one of the effective ways to solve the above problem. Specifically, we constructs a test statistic $M_j$ for each feature $x_j$, referred to as the “mirror statistic”, which should possess the following two key properties:
+
+- (P1) A feature with a larger positive mirror statistic is more
+likely to be a relevant feature.
+
+- (P2) The sampling distribution of the mirror statistic of any null
+feature is symmetric about zero.
+
+Property (P1) suggests that we can rank the importance of each feature by its mirror statistic, and select those features with mirror statistics larger than a cutoff. Property (P2) implies that we can estimate the number of false positives using the left tail of the distribution, that is, 
+
+$$\#\{j\in S_0: M_j>t\}\approx\#\{j\in S_0:M_j<-t\}\approx\#\{j:M_j<−t\},\;\;\forall t>0.$$
+
+If we define
+$$FDP(t)=\frac{\#\{j\in S_0: M_j>t\}}{\#\{j: M_j>t\}\vee 1},$$
+then it can be estimated by
+$$\widehat{FDP}(t)=\frac{\#\{j: M_j<-t\}}{\#\{j: M_j>t\}\vee 1}$$
+For any designated FDR control level $q\in (0,1)$, we can choose the data-driven cutoff $\tau_q$ as follows:
+$$\tau_q = \min\{t>0: \widehat{FDP}(t) ≤ q\},$$
+and the final selection is $\hat S_{τ_q}=\{j:M_j >τ_q\}$.
+
+Under a mild assumption on the dependence among the covariates, it can be shown that the FDR can be controlled at the level $q$ asymptotically. 
+
+The selection function giving $p$ mirror statistics and the nominal level $q$ is implemented using Rcpp fonction as follow
+
+```{Rcpp eval=FALSE}
+IntegerVector Selection(NumericVector M, double q) {
+  if (q <= 0 || q >= 1) {
+    stop("Error: Invalid q value");
+  }
+  
+  double FDP(double t) {
+    int num = 0, den = 0;
+    for (int j = 0; j < M.size(); j++){
+      if (M[j] <= -t) num++;
+      if (M[j] >=  t) den++;
+    }
+    den = den >= 1 ? den : 1;
+    return 1.0 * num / den;
+  }
+  
+  double tao = 0.0; double interval = max(M) / 1000;
+  while(FDP(M, tao) > q)  tao += interval;
+  
+  IntegerVector features;
+  
+  for(int j = 0; j < M.size(); j++) {
+    if (M[j] >= tao) {
+      features.push_back(j + 1);
+    } 
+  }
+  return features;
+}
+```
+
+
+This R package provides implementations of three mirror methods: Gaussian mirrors, data splitting and multiple data splitting.
+
+
+### Gaussian Mirrors
+
+In Gaussian mirrors, we construct the $j$-th Mirror by replacing $x_j$ with a pair of variables $(x_j^+, x_j^-)$with $x_j^+ = x_j + c_jz_j$ and $x_j^- = x_j-c_jz_j$, where $z_j$ is an independently simulated Gaussian random vector with mean 0 and covariance $I_n$. Denote $X_{-j}$ be the submatrix of the design matrix $X$ with the $j$-th column removed, and $c_j$ is defined as follows, which results in a symmetric distribution of $M_j$ when $j\in S_0$.
+$$c_j=\sqrt{\frac{x_j'(I_n-X_{-j}(X_{-j}'X_{-j})^{-1}X_{-j})x_j}{z_j'(I_n-X_{-j}(X_{-j}'X_{-j})^{-1}X_{-j})z_j}}$$
+
+Now we have a new linear model $y=x_j^+\beta_j^+ +x_j^-\beta_j^- + X_{-j}\beta_{-j}$. Obtain $\hat\beta_j^+$ and $\hat\beta_j^-$ using OLS, and calculate the mirror statistic by $M_j=|\hat\beta_j^+ + \hat\beta_j^-|-|\hat\beta_j^+-\hat\beta_j^-|$.
+
+The function _GM_ implements Guassian mirrors.
+
+```{r eval=FALSE}
+Gaussian_Mirror <- function(y, X){
+  n <- length(y); p <- ncol(X) 
+  stopifnot(length(y) == nrow(X), n > p + 1)
+  X <- scale(X)
+  
+  GM_j <- function(j){
+    zj <- rnorm(n)
+    X_j <- X[, -j, drop = FALSE] 
+    Nj <- diag(1,n) - X_j %*% solve(crossprod(X_j)) %*% t(X_j) 
+    cj <- as.vector(sqrt(crossprod(Nj %*% X[ ,j]) / crossprod(Nj %*% zj)))
+    xjp <- X[ ,j] + cj * zj; xjn <- X[ ,j] - cj * zj
+    bj <- lm(y ~ xjp + xjn + X_j)$coefficients[2:3]
+    Mj <- abs(bj[1] + bj[2]) - abs(bj[1] - bj[2])
+    return(Mj)
+  }
+  
+  M <- sapply(1:p, GM_j)
+  names(M) <- colnames(X)
+  return(M)
+}
+
+GM <- function(y, X, q){
+  Mirror_stat <- Gaussian_Mirror(y, X)
+  feature <- Selection(Mirror_stat, q)
+  names(feature) <- colnames(X)[feature]
+  return(list(feature=feature, mirror_statistic = Mirror_stat))
+}
+```
+
+
+
+### Data Splitting
+
+In data splitting, we split the $n$ observations by half into two groups,
+denoted as $(y^{(1)}, X^{(1)})$,and $(y^{(2)}, X^{(2)})$, and then estimate $\hat\beta^{(1)}$ and $\hat\beta^{(2)}$ with OLS using each part of the data. Then the mirror statistic is structed as
+$$M_j=\textrm{sign}(\hat\beta^{(1)}_j\hat\beta^{(2)}_j)(\hat\beta^{(1)}_j+\hat\beta^{(2)}_j).$$
+
+The function _DS_ implements data splitting.
+
+```{r eval=FALSE}
+Data_split <- function(y, X){
+  n <- length(y); p <- ncol(X) 
+  stopifnot(length(y) == nrow(X), round(n/2) > p)
+  X <- scale(X)
+  
+  group1 <- sample(n, round(n/2)) 
+  X1 <- X[ group1, ]; y1 <- y[ group1, ]
+  X2 <- X[-group1, ]; y2 <- y[-group1, ]
+  beta1 <- lm(y1 ~ X1)$coefficient[-1] 
+  beta2 <- lm(y2 ~ X2)$coefficient[-1] 
+  M <- sign(beta1 * beta2) * (abs(beta1) + abs(beta2))
+  names(M) <- colnames(X)
+  return(M)
+}
+
+DS <- function(y, X, q){
+  Mirror_stat <- Data_split(y, X)
+  feature <- Selection(Mirror_stat, q)
+  names(feature) <- colnames(X)[feature]
+  return(list(feature=feature, mirror_statistic = Mirror_stat))
+}
+```
+
+
+
+### Multiple Data Splitting
+
+In order to remedy the issue of DS that may not be stable and can vary substantially across different sample splits, we independently repeat DS $m$ times with random sample splits. Each time the set of the selected features is denoted as $\hat S^{(k)}$ for $k\in\{1,\ldots, m\}$. For each feature $X_j$, we define the associated inclusion rate $I_j$ and its estimate $\hat I_j$ as
+
+$$I_j=\mathbb{E}\left[\frac{\mathbb{1}(j\in\hat S)}{|\hat S|\vee1}\Bigg|X,y\right],\quad \hat I_j=\frac{1}{m}\sum_{k=1}^m\frac{\mathbb{1}(j\in\hat S^{(k)})}{|\hat S^{(k)}|\vee1}.$$
+in which the expectation is taken with respect to the randomness in data splitting. 
+
+MDS ranks the importance of features by their inclusion rates, because if a feature is selected less frequently in repeated sample splitting, it is less likely to be a relevant feature. Therefore, we first sort the estimated inclusion rates: $0 \leq \hat I_{(1)} \leq \hat I_{(2)} \leq \ldots \leq \hat I_{(p)}$, then for a nominal FDR level $q\in(0, 1)$, find the largest $l\in\{1,\ldots,p\}$ such that $\hat I_{(1)} +· · · +\hat I_{(l)} \leq q$, and finally select the features$\hat S =\{j:\hat I_j >\hat I_{(l)}\}$.
+
+The function _MDS_ implements multiple data splitting.
+
+```{r eval=FALSE}
+MDS <- function(y, X, q, m=50){
+  p <- ncol(X)
+  inclusion_mat <- matrix(0, m, p)
+  colnames(inclusion_mat) <- colnames(X)
+  for(k in 1:m){
+    inclusion_mat[k, DS(y, X, q)$feature] <- 1
+  }
+  IR <- colMeans(inclusion_mat / pmax(rowSums(inclusion_mat), 1))
+  return(list(feature = which(IR >= sort(IR)[cumsum(sort(IR)) > q][1]),
+              inclusion_rate = IR))
+}
+```
+
+
+
+## Example
+
+### Generating data
+
+```{r}
+n <- 1000; p <- 30
+set.seed(0)
+beta <- sample(-2:2, p, replace = TRUE, prob = c(.1, .1, .5, .2, .1))
+X <- matrix(rnorm(n * p), n, p)
+y <- X %*% beta + rnorm(n)
+```
+
+
+### Selecting features
+
+```{r include=FALSE}
+library(SA24204176)
+library(parallel)
+library(glmnet)
+```
+
+
+```{r message=FALSE}
+q <- 0.1
+set.seed(0)
+GM.fit <- GM(y, X, q)
+DS.fit <- DS(y, X, q)
+MDS.fit <- MDS(y, X, q, m = 50)
+
+res <- matrix(0, 7, p)
+colnames(res) <- paste0("x", 1:p)
+rownames(res) <- c("true", "myGM", "theGM", "myDS", "theGS", "myMDS", "theMDS")
+
+res[1, beta != 0] <- 1
+res[2, GM.fit$feature] <- 1
+res[3, GM::gm(y, X, q)$gm_selected] <- 1
+res[4, DS.fit$feature] <- 1
+res[5, DSfdr::DS(X, y, 1, q)$DS_feature] <- 1
+res[6, MDS.fit$feature] <- 1
+res[7, DSfdr::DS(X, y, 50, q)$MDS_feature] <- 1
+
+knitr::kable(res)
+```
+
+
+### Benchmarking
+
+```{r message=FALSE}
+library(microbenchmark)
+ts <- microbenchmark(
+  myGM   = GM(y, X, q),
+  theGM  = GM::gm(y, X, q),
+  myDS   = DS(y, X, q),
+  theDS  = DSfdr::DS(X, y, 1, q),
+  myMDS  = MDS(y, X, q),
+  theMDS = DSfdr::DS(X, y, 50, q),
+  times  = 20
+)
+summary(ts)[ , c(1, 3, 5, 6)]
+```
+
+

@@ -1,0 +1,2514 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Jun Zhou" />
+
+<meta name="date" content="2024-12-02" />
+
+<title>Homework answer</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Homework answer</h1>
+<h4 class="author">Jun Zhou</h4>
+<h4 class="date">2024-12-02</h4>
+
+
+
+<div id="homework-0" class="section level1">
+<h1>Homework 0</h1>
+<div id="question" class="section level2">
+<h2>Question</h2>
+<p>Use knitr to produce at least 3 examples. For each example,texts
+should mix with figures and/or tables. Better to have mathematical
+formulas.</p>
+</div>
+<div id="answer" class="section level2">
+<h2>Answer</h2>
+<div id="example-1-table-of-employees" class="section level3">
+<h3>Example 1: Table of Employees</h3>
+<p>The table below contains information about some employees,including
+name,age,grade,department and experience. Experience represents the
+number of years of work experience that each individual has in their
+respective field or role.</p>
+<table>
+<caption>Table of Employees</caption>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="right">Age</th>
+<th align="left">Grade</th>
+<th align="left">Department</th>
+<th align="right">Experience</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Alice</td>
+<td align="right">25</td>
+<td align="left">A</td>
+<td align="left">Marketing</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Bob</td>
+<td align="right">30</td>
+<td align="left">B</td>
+<td align="left">Finance</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">Charlie</td>
+<td align="right">28</td>
+<td align="left">A-</td>
+<td align="left">HR</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">David</td>
+<td align="right">32</td>
+<td align="left">B+</td>
+<td align="left">Operations</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="left">Eve</td>
+<td align="right">27</td>
+<td align="left">A</td>
+<td align="left">IT</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Frank</td>
+<td align="right">35</td>
+<td align="left">C</td>
+<td align="left">Sales</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Grace</td>
+<td align="right">33</td>
+<td align="left">A</td>
+<td align="left">Finance</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Henry</td>
+<td align="right">29</td>
+<td align="left">B-</td>
+<td align="left">HR</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Ivy</td>
+<td align="right">31</td>
+<td align="left">A</td>
+<td align="left">Marketing</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">Jack</td>
+<td align="right">36</td>
+<td align="left">A+</td>
+<td align="left">Operations</td>
+<td align="right">9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-2-plotting-a-cardioid-curve" class="section level3">
+<h3>Example 2: Plotting a Cardioid Curve</h3>
+<p>In mathematics, a cardioid curve is a heart-shaped curve traced by a
+point on the circumference of a circle rolling around another circle of
+the same radius. The equations of a cardioid in polar coordinates are
+given by <span class="math display">\[r=1−\sin(\theta)\]</span> where
+<span class="math inline">\(r\)</span> represents the distance from the
+origin and <span class="math inline">\(\theta\)</span> is the angle.</p>
+<p>Here is a plot of a cardioid curve in R:</p>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="example-3-classification-tree" class="section level3">
+<h3>Example 3: Classification Tree</h3>
+<p>Here is a part of the South African heart disease data:</p>
+<table>
+<caption>South African heart disease</caption>
+<colgroup>
+<col width="6%" />
+<col width="12%" />
+<col width="7%" />
+<col width="15%" />
+<col width="12%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">sbp</th>
+<th align="right">tobacco</th>
+<th align="right">ldl</th>
+<th align="right">adiposity</th>
+<th align="left">famhist</th>
+<th align="right">typea</th>
+<th align="right">obesity</th>
+<th align="right">alcohol</th>
+<th align="right">age</th>
+<th align="right">chd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">160</td>
+<td align="right">12.00</td>
+<td align="right">5.73</td>
+<td align="right">23.11</td>
+<td align="left">Present</td>
+<td align="right">49</td>
+<td align="right">25.30</td>
+<td align="right">97.20</td>
+<td align="right">52</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">144</td>
+<td align="right">0.01</td>
+<td align="right">4.41</td>
+<td align="right">28.61</td>
+<td align="left">Absent</td>
+<td align="right">55</td>
+<td align="right">28.87</td>
+<td align="right">2.06</td>
+<td align="right">63</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">118</td>
+<td align="right">0.08</td>
+<td align="right">3.48</td>
+<td align="right">32.28</td>
+<td align="left">Present</td>
+<td align="right">52</td>
+<td align="right">29.14</td>
+<td align="right">3.81</td>
+<td align="right">46</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">170</td>
+<td align="right">7.50</td>
+<td align="right">6.41</td>
+<td align="right">38.03</td>
+<td align="left">Present</td>
+<td align="right">51</td>
+<td align="right">31.99</td>
+<td align="right">24.26</td>
+<td align="right">58</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">134</td>
+<td align="right">13.60</td>
+<td align="right">3.50</td>
+<td align="right">27.78</td>
+<td align="left">Present</td>
+<td align="right">60</td>
+<td align="right">25.99</td>
+<td align="right">57.34</td>
+<td align="right">49</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">132</td>
+<td align="right">6.20</td>
+<td align="right">6.47</td>
+<td align="right">36.21</td>
+<td align="left">Present</td>
+<td align="right">62</td>
+<td align="right">30.77</td>
+<td align="right">14.14</td>
+<td align="right">45</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>Using classification tree method to provide a model for determining
+whether a patient has heart disease (CHD).The classification tree is
+shown in the following figure.</p>
+<p><img role="img" src="data:image/png;base64,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" width="100%" /></p>
+<p>The confusion matrix of this classification tree is</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">predict \ chd</th>
+<th align="center">0</th>
+<th align="center">1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">284</td>
+<td align="center">78</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">18</td>
+<td align="center">82</td>
+</tr>
+</tbody>
+</table>
+<p>The misclassification rate is <span class="math display">\[\frac{78+18}{284+78+18+82}=0.2078.\]</span></p>
+</div>
+</div>
+</div>
+<div id="homework-1" class="section level1">
+<h1>Homework 1</h1>
+<div id="question-1" class="section level2">
+<h2>Question 1</h2>
+<p><strong>Exercise 3.4</strong> The Rayleigh density is <span class="math display">\[f(x)=\frac{x}{\sigma^2}\mathrm{e}^{-x^2/(2\sigma^2)},\;x\geq
+0,\sigma&gt;0.\]</span> Develop an algorithm to generate random samples
+from a Rayleigh(<span class="math inline">\(\sigma\)</span>)
+distribution. Generate Rayleigh(<span class="math inline">\(\sigma\)</span>) samples for several choices of
+<span class="math inline">\(\sigma &gt; 0\)</span> and check that the
+mode of the generated samples is close to the theoretical mode <span class="math inline">\(\sigma\)</span> (check the histogram).</p>
+</div>
+<div id="answer-1" class="section level2">
+<h2>Answer 1</h2>
+<p>The inverse transform method can be applied to generate samples from
+Rayleigh(<span class="math inline">\(\sigma\)</span>) distribution. We
+first find the CDF of Rayleigh(<span class="math inline">\(\sigma\)</span>) distribution: <span class="math display">\[F(x)=\int_{-\infty}^x f(x)\mathrm{d}x=\int_{0}^x
+\frac{x}{\sigma^2}\mathrm{e}^{-x^2/(2\sigma^2)}\mathrm{d}x=1-\mathrm{e}^{-x^2/(2\sigma^2)},\;x\geq
+0.\]</span> Then the inverse function of <span class="math inline">\(F(x)\)</span> can be solved as <span class="math display">\[F^{-1}(u)=\sigma\sqrt{-2\log(1-u)},\;0&lt;u&lt;1.\]</span>
+So we can obtain samples from Rayleigh(<span class="math inline">\(\sigma\)</span>) distribution in two steps.</p>
+<ul>
+<li><p>Generate <span class="math inline">\(U\sim
+U(0,1)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(X=\sigma\sqrt{-2\log(1-U)}\)</span>, or
+equivalently let <span class="math inline">\(X=\sigma\sqrt{-2\log(U)}\)</span></p></li>
+</ul>
+<p>For <span class="math inline">\(\sigma=0.1, 0.2, 0.5,1\)</span>,
+10000 samples were generated from Reyleigh (<span class="math inline">\(\sigma\)</span>) distribution. Histograms of the
+sample data were respectively drawn as follow, where the blue dotted
+line is the theoretical mode <span class="math inline">\(\sigma\)</span>.</p>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>As we can see from these histograms, the sample mode is quite close
+to the theoretical mode, regardless of the value of <span class="math inline">\(\sigma\)</span>, which provides evidence that the
+generated data is indeed derived from Raylaigh(<span class="math inline">\(\sigma\)</span>) distribution as we expected.</p>
+</div>
+<div id="question-2" class="section level2">
+<h2>Question 2</h2>
+<p><strong>Exercise 3.11</strong> Generate a random sample of size 1000
+from a normal location mixture. The components of the mixture have <span class="math inline">\(N(0, 1)\)</span> and <span class="math inline">\(N(3, 1)\)</span> distributions with mixing
+probabilities <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2 = 1 − p_1\)</span>. Graph the histogram of the
+sample with density superimposed, for <span class="math inline">\(p_1 =
+0.75\)</span>. Repeat with different values for <span class="math inline">\(p_1\)</span> and observe whether the empirical
+distribution of the mixture appears to be bimodal. Make a conjecture
+about the values of <span class="math inline">\(p_1\)</span> that
+produce bimodal mixtures.</p>
+</div>
+<div id="answer-2" class="section level2">
+<h2>Answer 2</h2>
+<p>It is easy to generate samples from the mixed normal distribution
+required by the question.</p>
+<ul>
+<li><p>Generate <span class="math inline">\(k\)</span>, where <span class="math inline">\(k\)</span> takes <span class="math inline">\(0\)</span> with probability <span class="math inline">\(p_1\)</span> and <span class="math inline">\(3\)</span> with probability <span class="math inline">\(p_2=1-p_1\)</span>.</p></li>
+<li><p>Generate <span class="math inline">\(X\)</span> from <span class="math inline">\(N(k,1)\)</span>.</p></li>
+</ul>
+<p>For <span class="math inline">\(p_1=0.05,0.15,0.25,\dots,0.95\)</span>, included
+<span class="math inline">\(p_1=0.75\)</span>, we graph the histogram of
+the sample with density superimposed as follow.</p>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>Observing the empirical distribution of the mixed variables, when
+<span class="math inline">\(p_1=0.25,0.35,0.45,0.55,0.65,0.75\)</span>,
+the mixture appears to be bimodal. Thus it is derived to make conjecture
+that the values of <span class="math inline">\(0.2 \leq p_1 \leq
+0.8\)</span> produce bimodal mixtures.</p>
+</div>
+<div id="question-3" class="section level2">
+<h2>Question 3</h2>
+<p><strong>Exercise 3.20</strong> A <em>compound Poisson process</em> is
+a stochastic process <span class="math inline">\(\{X(t), t \geq
+0\}\)</span> that can be represented as the random sum <span class="math inline">\(X(t) = \sum^{N(t)}_{i=1} Y_i,\;t \geq 0\)</span>,
+where <span class="math inline">\(\{N(t), t \geq 0\}\)</span> is a
+Poisson process and <span class="math inline">\(Y_1, Y_2,\dots\)</span>
+are <span class="math inline">\(\mathrm{iid}\)</span> and independent of
+<span class="math inline">\(\{N(t), t \geq 0\}\)</span>. Write a program
+to simulate a compound Poisson(<span class="math inline">\(\lambda\)</span>)–Gamma process (<span class="math inline">\(Y\)</span> has a Gamma distribution). Estimate the
+mean and the variance of <span class="math inline">\(X(10)\)</span> for
+several choices of the parameters and compare with the theoretical
+values. Hint: Show that <span class="math inline">\(E[X(t)] = \lambda
+tE[Y_1]\)</span> and <span class="math inline">\(Var(X(t)) = \lambda
+tE[Y^2_1 ]\)</span>.</p>
+</div>
+<div id="answer-3" class="section level2">
+<h2>Answer 3</h2>
+<p>We first discuss how to simulate a compound Poisson(<span class="math inline">\(\lambda\)</span>)–Gamma process <span class="math inline">\(X(t_0)\)</span>, where the Gamma distribution has
+shape parameter <span class="math inline">\(\alpha\)</span> and rate
+parameter <span class="math inline">\(\beta\)</span>.</p>
+<ul>
+<li><p>Set <span class="math inline">\(S_1=0\)</span>.</p></li>
+<li><p>For <span class="math inline">\(j=1,2,\dots\)</span>, while <span class="math inline">\(S_j \leq t_0\)</span>:</p>
+<ul>
+<li>Generate <span class="math inline">\(T_j \sim
+\mathrm{Exp}(\lambda)\)</span>.</li>
+<li>Set <span class="math inline">\(S_j = T_1 + ··· + T_j\)</span>.</li>
+</ul></li>
+<li><p><span class="math inline">\(N(t_0) =
+\min_j(S_j&gt;t_0)-1\)</span>.</p></li>
+<li><p>Generate <span class="math inline">\(\mathrm{iid}\)</span> sample
+<span class="math inline">\(Y_1,Y_2,\dots,Y_{N(t_0)}\)</span> from <span class="math inline">\(\mathrm{Gamma}(\alpha,\beta)\)</span>.</p></li>
+<li><p>Set <span class="math inline">\(X(t_0)=\sum^{N(t_0)}_{i=1}
+Y_i\)</span>.</p></li>
+</ul>
+<p>Then, we calculate <span class="math inline">\(E[X(t)]\)</span> and
+<span class="math inline">\(Var(X(t))\)</span> using formulas for
+conditional expectation and conditional variance.</p>
+<p><span class="math display">\[E(X(t))=E[E(X(t)|N(t))]=E[N(t)E(Y_1)]=E[N(t)]E(Y_1)=\lambda
+t\cdot\alpha/\beta.\]</span></p>
+<p><span class="math display">\[\mathrm{Var}(X(t))=\mathrm{Var}[E(X(t)|N(t))]+E[\mathrm{Var}(X(t)|N(t))]=\mathrm{Var}[N(t)E(Y_1)]+E[N(t)\mathrm{Var}(Y_1)]=\lambda
+t E(Y_1^2)=\lambda t\cdot\alpha(\alpha+1)/\beta^2.\]</span></p>
+<p>Finally, we generate 10000 sample of <span class="math inline">\(X(10)\)</span> for each choice of parameters <span class="math inline">\(\lambda,\alpha,\beta\in\{1,2,3\}\)</span>, and
+compare the sample mean and sample variance with the theoretical values.
+The result is shown in the table below.</p>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="7%" />
+<col width="5%" />
+<col width="20%" />
+<col width="14%" />
+<col width="25%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">lambda</th>
+<th align="right">shape</th>
+<th align="right">rate</th>
+<th align="right">Theoretical mean</th>
+<th align="right">Sample mean</th>
+<th align="right">Theoretical variance</th>
+<th align="right">Sample variance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">10.000000</td>
+<td align="right">10.075252</td>
+<td align="right">20.000000</td>
+<td align="right">20.526681</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">5.000000</td>
+<td align="right">4.973672</td>
+<td align="right">5.000000</td>
+<td align="right">5.076499</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">3.333333</td>
+<td align="right">3.325370</td>
+<td align="right">2.222222</td>
+<td align="right">2.209651</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">20.000000</td>
+<td align="right">19.896971</td>
+<td align="right">60.000000</td>
+<td align="right">60.521130</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">10.000000</td>
+<td align="right">9.998209</td>
+<td align="right">15.000000</td>
+<td align="right">15.332315</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">6.666667</td>
+<td align="right">6.657265</td>
+<td align="right">6.666667</td>
+<td align="right">6.708664</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">30.000000</td>
+<td align="right">30.052042</td>
+<td align="right">120.000000</td>
+<td align="right">122.457228</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">15.000000</td>
+<td align="right">14.987258</td>
+<td align="right">30.000000</td>
+<td align="right">29.625257</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">10.000000</td>
+<td align="right">9.950045</td>
+<td align="right">13.333333</td>
+<td align="right">13.265809</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">20.000000</td>
+<td align="right">20.022369</td>
+<td align="right">40.000000</td>
+<td align="right">40.212437</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">10.000000</td>
+<td align="right">9.992646</td>
+<td align="right">10.000000</td>
+<td align="right">9.920174</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">6.666667</td>
+<td align="right">6.633526</td>
+<td align="right">4.444444</td>
+<td align="right">4.317692</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">40.000000</td>
+<td align="right">40.074585</td>
+<td align="right">120.000000</td>
+<td align="right">120.632767</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">20.000000</td>
+<td align="right">20.101215</td>
+<td align="right">30.000000</td>
+<td align="right">29.874998</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">13.333333</td>
+<td align="right">13.301097</td>
+<td align="right">13.333333</td>
+<td align="right">13.130049</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">60.000000</td>
+<td align="right">59.821027</td>
+<td align="right">240.000000</td>
+<td align="right">236.858388</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">30.000000</td>
+<td align="right">30.105421</td>
+<td align="right">60.000000</td>
+<td align="right">61.234758</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">20.000000</td>
+<td align="right">19.994926</td>
+<td align="right">26.666667</td>
+<td align="right">26.424050</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">30.000000</td>
+<td align="right">30.068099</td>
+<td align="right">60.000000</td>
+<td align="right">60.324254</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">15.000000</td>
+<td align="right">14.982548</td>
+<td align="right">15.000000</td>
+<td align="right">14.895702</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">10.000000</td>
+<td align="right">10.000675</td>
+<td align="right">6.666667</td>
+<td align="right">6.572096</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">60.000000</td>
+<td align="right">59.917184</td>
+<td align="right">180.000000</td>
+<td align="right">179.653831</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">30.000000</td>
+<td align="right">29.942020</td>
+<td align="right">45.000000</td>
+<td align="right">43.650044</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">20.000000</td>
+<td align="right">20.028246</td>
+<td align="right">20.000000</td>
+<td align="right">19.842074</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">90.000000</td>
+<td align="right">89.770602</td>
+<td align="right">360.000000</td>
+<td align="right">361.966124</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">45.000000</td>
+<td align="right">45.054356</td>
+<td align="right">90.000000</td>
+<td align="right">89.940976</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">30.000000</td>
+<td align="right">29.981612</td>
+<td align="right">40.000000</td>
+<td align="right">39.603798</td>
+</tr>
+</tbody>
+</table>
+<p>According to the results in the table, it can be seen that the sample
+mean and the theoretical mean, the sample variance and the theoretical
+variance are very close, which verifies the correctness of our
+algorithm.</p>
+</div>
+</div>
+<div id="homework-2" class="section level1">
+<h1>Homework 2</h1>
+<div id="question-1-1" class="section level2">
+<h2>Question 1</h2>
+<p><strong>Exercise 5.4</strong> Write a function to compute a Monte
+Carlo estimate of the Beta(3,3) cdf, and use the function to estimate
+<span class="math inline">\(F(x)\)</span> for <span class="math inline">\(x = 0.1, 0.2,\ldots, 0.9\)</span>. Compare the
+estimates with the values returned by the <span class="math inline">\(\mathtt{pbeta}\)</span> function in R.</p>
+</div>
+<div id="answer-1-1" class="section level2">
+<h2>Answer 1</h2>
+<p>It is known that the probability density function(pdf) of Beta(3,3)
+is <span class="math display">\[f(x)=\frac{1}{\mathrm{B}(3,3)}x^{3-1}(1-x)^{3-1}=30x^2(1-x)^2,\quad
+0&lt;x&lt;1.\]</span> So we are aimed to estimate the following integral
+using Monte Carlo method because of the relation between cdf and pdf.
+<span class="math display">\[F(x)=\int_{-\infty}^x
+f(t)\mathrm{d}t=\int_{0}^x30t^2(1-t)^2\mathrm{d}t\]</span></p>
+<p>If we let <span class="math inline">\(Y\sim U(0,x)\)</span>, then
+<span class="math inline">\(F(x)=E_Y[30xY^2(1-Y)^2]\)</span>. Therefore,
+We can estimate <span class="math inline">\(F(x)\)</span> from the
+flowchart below.</p>
+<ul>
+<li>1.Set <span class="math inline">\(m=10000\)</span>, the number of
+simulations.</li>
+<li>2.Generate random numbers <span class="math inline">\(Y_1,\ldots,Y_m\)</span> from the uniform
+distribution <span class="math inline">\(U(0,x)\)</span>.</li>
+<li>3.Calculate <span class="math display">\[\hat
+F(x)=\frac{1}{m}\sum_{i=1}^m 30xY_i^2(1-Y_i)^2.\]</span></li>
+<li>4.Output <span class="math inline">\(\hat F(x)\)</span>.</li>
+</ul>
+<p>For <span class="math inline">\(x=0.1, 0.2,\ldots, 0.9\)</span>, the
+estimation <span class="math inline">\(\hat F(x)\)</span> is displayed
+below with the values returned by the <span class="math inline">\(\mathtt{pbeta}\)</span> function attached.</p>
+<table style="width:100%;">
+<colgroup>
+<col width="13%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="8%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">x</td>
+<td align="right">0.10000</td>
+<td align="right">0.20000</td>
+<td align="right">0.30000</td>
+<td align="right">0.40000</td>
+<td align="right">0.5000</td>
+<td align="right">0.60000</td>
+<td align="right">0.70000</td>
+<td align="right">0.80000</td>
+<td align="right">0.90000</td>
+</tr>
+<tr class="even">
+<td align="left">pbeta</td>
+<td align="right">0.00856</td>
+<td align="right">0.05792</td>
+<td align="right">0.16308</td>
+<td align="right">0.31744</td>
+<td align="right">0.5000</td>
+<td align="right">0.68256</td>
+<td align="right">0.83692</td>
+<td align="right">0.94208</td>
+<td align="right">0.99144</td>
+</tr>
+<tr class="odd">
+<td align="left">estimation</td>
+<td align="right">0.00852</td>
+<td align="right">0.05789</td>
+<td align="right">0.16452</td>
+<td align="right">0.31514</td>
+<td align="right">0.4961</td>
+<td align="right">0.69023</td>
+<td align="right">0.83760</td>
+<td align="right">0.94232</td>
+<td align="right">0.99242</td>
+</tr>
+</tbody>
+</table>
+<p>It can been seen that the two values at the same <span class="math inline">\(x\)</span> is not much different.</p>
+</div>
+<div id="question-2-1" class="section level2">
+<h2>Question 2</h2>
+<p><strong>Exercise 5.9</strong> The Rayleigh density is <span class="math display">\[f(x)=\frac{x}{\sigma^2}\mathrm{e}^{-x^2/(2\sigma^2)},\;x\geq
+0,\sigma&gt;0.\]</span> Implement a function to generate samples from a
+Rayleigh(<span class="math inline">\(\sigma\)</span>) distribution,
+using antithetic variables. What is the percent reduction in variance of
+<span class="math inline">\(\frac{X+X&#39;}{2}\)</span> compared with
+<span class="math inline">\(\frac{X_1+X_2}{2}\)</span> for independent
+<span class="math inline">\(X_1, X_2\)</span> ?</p>
+</div>
+<div id="answer-2-1" class="section level2">
+<h2>Answer 2</h2>
+<p>In Exercise 3.4, we have discussed how to generate samples from
+Rayleigh(<span class="math inline">\(\sigma\)</span>) distribution using
+the inverse transformation method, that is, let <span class="math inline">\(X=\sigma\sqrt{-2\log(1-U)}\)</span> where <span class="math inline">\(U\sim U(0,1)\)</span>.</p>
+<p>Now, the expression of the antithetic variable is <span class="math inline">\(X&#39;=\sigma\sqrt{-2\log U}\)</span> with the
+same <span class="math inline">\(U\)</span> in the expression of <span class="math inline">\(X\)</span>.</p>
+<p>For the reason that the variance of <span class="math inline">\(\frac{X+X&#39;}{2}\)</span> is hard to derive, we
+turn to the Monte Carlo method.</p>
+<p>We generate 10000 samples of <span class="math inline">\(\frac{X_1+X_2}{2}\)</span> and <span class="math inline">\(\frac{X+X&#39;}{2}\)</span> with <span class="math inline">\(\sigma=1\)</span>. The sample mean is 1.255 and
+1.2531 respectively, and the sample variance is 0.2148 and 0.0116
+respectively. The variance reduction rate is approximately 94.6%.</p>
+</div>
+<div id="question-3-1" class="section level2">
+<h2>Question 3</h2>
+<p><strong>Exercise 5.13</strong> Find two importance functions <span class="math inline">\(f_1\)</span> and <span class="math inline">\(f_2\)</span> that are supported on <span class="math inline">\((1, \infty)\)</span> and are ‘close’ to <span class="math display">\[g(x)=\frac{x^2}{\sqrt{2π}}
+\mathrm{e}^{−x^2/2},\quad x&gt;1.\]</span> Which of your two importance
+functions should produce the smaller variance in estimating <span class="math display">\[\int_1^{+\infty}\frac{x^2}{\sqrt{2π}}
+\mathrm{e}^{−x^2/2}\mathrm{d}x\]</span> by importance sampling?
+Explain.</p>
+</div>
+<div id="answer-3-1" class="section level2">
+<h2>Answer 3</h2>
+<p>We find the two important functions below. <span class="math inline">\(\Phi(\cdot)\)</span> is the cdf of the standard
+normal distribution. <span class="math display">\[f_1(x)=\frac{1}{\sqrt{2\pi}\Phi(-1)}\mathrm{e}^{−x^2/2},\quad
+x&gt;1\]</span> <span class="math display">\[f_2(x)=\mathrm{e}^{1/2}\cdot
+x\mathrm{e}^{−x^2/2},\quad x&gt;1\]</span></p>
+<p>The two estimates of the integral is given by<br />
+<span class="math display">\[\hat\theta_1=\frac{1}{m}\sum_{i=1}^m
+\frac{g(X_{1i})}{f_1(X_{1i})},\]</span> <span class="math display">\[\hat\theta_2=\frac{1}{m}\sum_{i=1}^m
+\frac{g(X_{2i})}{f_2(X_{2i})}.\]</span> where <span class="math inline">\(X_{ki},i=1,\ldots,m\)</span> is generated from
+<span class="math inline">\(f_k(x),\;k=1,2\)</span>. Their variance is
+<span class="math display">\[\mathrm{var}(\hat\theta_1)=\frac{1}{m}\mathrm{var}\left(\frac{g(X_1)}{f_1(X_1)}\right)=\frac{1}{m}\mathrm{var}\left(\Phi(-1)X_1^2\right)\]</span>
+<span class="math display">\[\mathrm{var}(\hat\theta_1)=\frac{1}{m}\mathrm{var}\left(\frac{g(X_2)}{f_2(X_2)}\right)=\frac{1}{m}\mathrm{var}\left(\frac{X_2}{\sqrt{2\pi
+e}}\right)\]</span> We use Monte Carlo method to estmate them, before
+which we should know how to generate iid sample from <span class="math inline">\(f_1(x)\)</span> and <span class="math inline">\(f_2(x)\)</span>. For those two pdf, it is easy to
+derive the cdf and their inverse as follows. So the inverse transform
+method works. <span class="math display">\[F_1(x)=\frac{\Phi(x)-\Phi(1)}{1-\Phi(1)}, \quad
+F_1^{-1}(u)=\Phi^{-1}(1-\Phi(-1)(1-u)).\]</span> <span class="math display">\[F_2(x)=1-\mathrm{e}^{(1-x^2)/2}, \quad
+F_2^{-1}(u)=\sqrt{1-2\log(1-u)}.\]</span></p>
+<p>Monte carlo simulation show that <span class="math inline">\(\widehat{\mathrm{var}}(\hat\theta_1)/\widehat{\mathrm{var}}(\hat\theta_2)=\)</span>
+4.625, which indicates that <span class="math inline">\(\hat\theta_2\)</span> produce the smaller
+variance. The reason can be that <span class="math inline">\(f_2(x)=C_2x\mathrm{e}^{−x^2/2}\)</span> is closer
+to <span class="math inline">\(g(x)=Cx^2\mathrm{e}^{−x^2/2}\)</span> in
+major part than <span class="math inline">\(f_1(x)=C_1\mathrm{e}^{−x^2/2}\)</span>.</p>
+</div>
+<div id="question-4" class="section level2">
+<h2>Question 4</h2>
+<p><strong>Monte Carlo experiment.</strong></p>
+<p>For <span class="math inline">\(n = 10^4, 2 \times 10^4, 4 \times
+10^4, 6 \times 10^4, 8 \times 10^4\)</span>, apply the fast sorting
+algorithm to randomly permuted numbers of <span class="math inline">\(1,\ldots, n\)</span>. Calculate computation time
+averaged over 100 simulations, denoted by <span class="math inline">\(a_n\)</span>. Regress <span class="math inline">\(a_n\)</span> on <span class="math inline">\(t_n:=n\log(n)\)</span>, and graphically show the
+results(scatter plot and regression line).</p>
+</div>
+<div id="answer-4" class="section level2">
+<h2>Answer 4</h2>
+<p>It’s not so difficult to implement the fast sorting algorithm using
+recursion.(See the rmd file)</p>
+<p>Then we get <span class="math inline">\(a_n\)</span> according to the
+question as follows.</p>
+<table style="width:100%;">
+<colgroup>
+<col width="6%" />
+<col width="10%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><span class="math inline">\(n\)</span></th>
+<th align="center"><span class="math inline">\(10^4\)</span></th>
+<th align="center"><span class="math inline">\(2\times10^4\)</span></th>
+<th align="center"><span class="math inline">\(4\times10^4\)</span></th>
+<th align="center"><span class="math inline">\(6\times10^4\)</span></th>
+<th align="center"><span class="math inline">\(8\times10^4\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(a_n\)</span></td>
+<td align="center"><span class="math inline">\(0.1888\)</span></td>
+<td align="center"><span class="math inline">\(0.3752\)</span></td>
+<td align="center"><span class="math inline">\(0.7572\)</span></td>
+<td align="center"><span class="math inline">\(1.1585\)</span></td>
+<td align="center"><span class="math inline">\(1.6327\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Regress <span class="math inline">\(a_n\)</span> on <span class="math inline">\(t_n:=n\log(n)\)</span>, we get the following
+graph.</p>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>It seems that all <span class="math inline">\((t_n,a_n)\)</span> are
+on the regression line, which corroborate that the expected complexity
+of fast sorting algorithm is <span class="math inline">\(O(n\log(n))\)</span>.</p>
+</div>
+</div>
+<div id="homework-3" class="section level1">
+<h1>Homework 3</h1>
+<div id="question-1-2" class="section level2">
+<h2>Question 1</h2>
+<p><strong>Exercise 6.6</strong> Estimate the 0.025, 0.05, 0.95, and
+0.975 quantiles of the skewness <span class="math inline">\(\sqrt{b_1}\)</span> under normality by a Monte
+Carlo experiment. Compute the standard error of the estimates from
+(2.14) using the normal approximation for the density (with exact
+variance formula). Compare the estimated quantiles with the quantiles of
+the large sample approximation <span class="math inline">\(\sqrt{b_1}
+\approx N(0,6/n)\)</span>.</p>
+</div>
+<div id="answer-1-2" class="section level2">
+<h2>Answer 1</h2>
+<p>It is noted that sample skewness is defined as <span class="math display">\[\sqrt{b_1}=\frac{\frac{1}{n}\sum_{i=1}^n(X_i-\bar
+X)^3}{\big[\frac{1}{n}\sum_{i=1}^n(X_i-\bar X)^2\big]^{3/2}},\]</span>
+whose exact variance is <span class="math display">\[\mathrm{Var}(\sqrt{b_1})=\frac{6(n-2)}{(n+1)(n+3)}.\]</span>
+Then the SE of the estimates from (2.14) using the normal approximation
+for the density can be computed.</p>
+<p>The 0.025, 0.05, 0.95 and 0.975 quantiles of sample skewness are
+estimated by Monte-Carlo simulation. The results,quantiles of large
+sample approximation and the SE are displayed in the following
+table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">0.025</th>
+<th align="right">0.05</th>
+<th align="right">0.95</th>
+<th align="right">0.975</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Estimated</td>
+<td align="right">-0.4752</td>
+<td align="right">-0.3892</td>
+<td align="right">0.3897</td>
+<td align="right">0.4681</td>
+</tr>
+<tr class="even">
+<td align="left">Normal</td>
+<td align="right">-0.4801</td>
+<td align="right">-0.4029</td>
+<td align="right">0.4029</td>
+<td align="right">0.4801</td>
+</tr>
+<tr class="odd">
+<td align="left">SE</td>
+<td align="right">0.0069</td>
+<td align="right">0.0050</td>
+<td align="right">0.0050</td>
+<td align="right">0.0065</td>
+</tr>
+</tbody>
+</table>
+<p>Each sample quantile is different from corresponding quantile of
+normal approximation within three SE.</p>
+</div>
+<div id="question-2-2" class="section level2">
+<h2>Question 2</h2>
+<p><strong>Exercise 6.B</strong> Tests for association based on Pearson
+product moment correlation <span class="math inline">\(\rho\)</span>,
+Spearman’s rank correlation coefficient <span class="math inline">\(\rho_S\)</span>, or Kendall’s coefficient <span class="math inline">\(\tau\)</span>, are implemented in . Show
+(empirically) that the nonparametric tests based on <span class="math inline">\(\rho_s\)</span> or <span class="math inline">\(\tau\)</span> are less powerful than the
+correlation test when the sampled distribution is bivariate normal. Find
+an example of an alternative (a bivariate distribution <span class="math inline">\((X,Y)\)</span> such that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are dependent) such that at least one
+of the nonparametric tests have better empirical power than the
+correlation test against this alternative.</p>
+</div>
+<div id="answer-2-2" class="section level2">
+<h2>Answer 2</h2>
+<p>Usually, the nonparametric tests based on <span class="math inline">\(\rho_s\)</span> or <span class="math inline">\(\tau\)</span> are less powerful than the
+correlation test when the sampled distribution is bivariate normal
+because the latter make use of more information about the true
+distribution but the former don’t.</p>
+<p>However, we can still find an alternative such that the Spearman’s
+rank correlation coefficient is more powerful than the correlation test.
+The essential is to choose a true correlation coefficient that is fairly
+close to 0, for example, 0.0001.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">method</th>
+<th align="right">power</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Pearson</td>
+<td align="right">0.0497</td>
+</tr>
+<tr class="even">
+<td align="left">Spearman</td>
+<td align="right">0.0503</td>
+</tr>
+<tr class="odd">
+<td align="left">Kendall</td>
+<td align="right">0.0490</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="question-3-2" class="section level2">
+<h2>Question 3</h2>
+<p>If we obtain the powers for two methods under a particular simulation
+setting with 10,000 experiments: say, 0.651 for one method and 0.676 for
+another method. We want to know if the powers are different at 0.05
+level.</p>
+<ul>
+<li>What is the corresponding hypothesis test problem?</li>
+<li>What test should we use? Z-test, two-sample t-test, paired t-test or
+McNemar test? Why?</li>
+<li>Please provide the least necessary information for hypothesis
+testing</li>
+</ul>
+</div>
+<div id="answer-3-2" class="section level2">
+<h2>Answer 3</h2>
+<ul>
+<li><p>Test null hypothesis <span class="math inline">\(H_0\)</span>:
+the powers for the two metheods are the same.</p></li>
+<li><p>McNemar test. The two-sample t-test was excluded because the test
+result on one experiment about the two methods are not independent. The
+paired t-test can be used, but it is not as good as the Mcnemar test,
+which is specific to discrete data.</p></li>
+<li><p>To use McNemar test, we need to construct a 2x2 contingency table
+in which <span class="math inline">\(n_{11}\)</span> denotes the number
+of experiments rejecting the null on two methods, <span class="math inline">\(n_{12}\)</span> for only rejecting on the first
+method, <span class="math inline">\(n_{21}\)</span> for only rejecting
+on the second method, and <span class="math inline">\(n_{22}\)</span>
+for not rejecting on any method. The sufficient statistic of McNemar
+test is <span class="math inline">\(\{n_{12},n_{21}\}\)</span>, but is
+not given. The known information is only <span class="math inline">\(n=10000,n_{11}+n_{12}=6510,n_{11}+n_{21}=6760\)</span>.
+If <span class="math inline">\(\{n_{12},n_{21}\}\)</span> is acquired,
+we can conduct McNemar test by the following fact <span class="math display">\[W=\frac{(n_{12}-n_{21})^2}{n_{12}+n_{21}}\xrightarrow[H_0]{d}
+\chi^2_1\]</span> and reject the null when <span class="math inline">\(W&gt;\chi^2_1(0.95)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<div id="homework-4" class="section level1">
+<h1>Homework 4</h1>
+<div id="question-1-3" class="section level2">
+<h2>Question 1</h2>
+<p>Of <span class="math inline">\(N = 1000\)</span> hypotheses, <span class="math inline">\(950\)</span> are null and <span class="math inline">\(50\)</span> are alternative. The p-value under any
+null hypothesis is uniformly distributed (use runif), and the p-value
+under any alternative hypothesis follows the beta distribution with
+parameter 0.1 and 1 (use rbeta). Obtain Bonferroni adjusted p-values and
+B-H adjusted p-values. Calculate FWER, FDR, and TPR under nominal level
+<span class="math inline">\(\alpha = 0.1\)</span> for each of the two
+adjustment methods based on <span class="math inline">\(m =
+10000\)</span> simulation replicates. You should output the 6 numbers
+(3) to a 3 × 2table (column names: Bonferroni correction, B-H
+correction; row names: FWER, FDR, TPR). Comment the results.</p>
+</div>
+<div id="answer-1-3" class="section level2">
+<h2>Answer 1</h2>
+<p>Noted that Bonferroni correction gives <span class="math inline">\(p_{i,adj}=Np_i\)</span>, and Benjamini-Hochberg
+correction gives <span class="math inline">\(p_{(i),adj}=Np_{(i)}/i\)</span>, we can obtain the
+adjusted p-values using R function <span class="math inline">\(\mathtt{p.adjust}\)</span>.</p>
+<p>For each replicate, we can get a contingency table depending on
+whether the null hypothesis is true and whether the null hypothesis is
+rejected.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">H0 is true</th>
+<th align="left">Ha is true</th>
+<th align="left">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Positive(reject H0)</td>
+<td align="left">V (FP)</td>
+<td align="left">S (TP)</td>
+<td align="left">R</td>
+</tr>
+<tr class="even">
+<td align="left">Negative (accept H0)</td>
+<td align="left">U (TN)</td>
+<td align="left">T (FN)</td>
+<td align="left">m-R</td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="left">m0=950</td>
+<td align="left">m1=50</td>
+<td align="left">m=1000</td>
+</tr>
+</tbody>
+</table>
+<p>Then we have <span class="math display">\[FWER=I(V\neq0),\quad
+FDR=V/R,\quad TPR=S/m_1.\]</span></p>
+<p>Perform 10000 replicates and average the above three metrics. The
+final result is shown in the table below.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Bonferroni correction</th>
+<th align="right">B-H correction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FWER</td>
+<td align="right">0.0914</td>
+<td align="right">0.9296</td>
+</tr>
+<tr class="even">
+<td align="left">FDR</td>
+<td align="right">0.0047</td>
+<td align="right">0.0951</td>
+</tr>
+<tr class="odd">
+<td align="left">TPR</td>
+<td align="right">0.3973</td>
+<td align="right">0.5610</td>
+</tr>
+</tbody>
+</table>
+<p>Since Bonferroni correction is more conservative than BH correction,
+all the three metrics of the former is lower than the latter.</p>
+<p>What’s more, it is worth noting that Bonferroni correction controls
+the FWER at the given level <span class="math inline">\(\alpha=0.1\)</span> and BH correction controls the
+FDR as well, which is in line with our expectations.</p>
+</div>
+<div id="question-2-3" class="section level2">
+<h2>Question 2</h2>
+<p><strong>Exercise 7.4</strong> Refer to the air-conditioning data set
+aircondit provided in the boot package. The 12 observations are the
+times in hours between failures of air-conditioning equipment <span class="math display">\[3, 5, 7, 18, 43, 85, 91, 98, 100, 130, 230,
+487.\]</span> Assume that the times between failures follow an
+exponential model Exp(<span class="math inline">\(\lambda\)</span>).Obtain the MLE of the hazard
+rate <span class="math inline">\(\lambda\)</span> and use bootstrap to
+estimate the bias and standard error of the estimate.</p>
+</div>
+<div id="answer-2-3" class="section level2">
+<h2>Answer 2</h2>
+<p>Denote the 12 observations by <span class="math inline">\(X_1,\ldots,X_{12}\)</span>, than the
+log-likelihood function of <span class="math inline">\(\lambda\)</span>
+is <span class="math display">\[l(\lambda)=\sum_{i=1}^{12}(\log(\lambda)-\lambda
+x_i)=12(\log(\lambda)-\lambda\bar x)\]</span> where <span class="math inline">\(\bar x=\frac{1}{12}\sum_{i=1}^{12}x_i\)</span>.
+Therefore the MLE of <span class="math inline">\(\lambda\)</span> is the
+solve of the equation <span class="math inline">\(\partial
+l(\lambda)/\partial\lambda=0\)</span>, which is <span class="math display">\[\hat\lambda=\frac{1}{\bar X}.\]</span></p>
+<p>Plugging the data into the fomula, we get <span class="math inline">\(\hat\lambda=\)</span> 0.0093.</p>
+<p>Using bootstrap, we can show the bias is 0.0013, and the standard
+error is 0.0044. The code is shown at the rmd file attached.</p>
+</div>
+<div id="question-3-3" class="section level2">
+<h2>Question 3</h2>
+<p><strong>Exercise 7.5</strong> Refer to <em>Exercise 7.4</em>. Compute
+95% bootstrap conﬁdence intervals for the mean time between failures
+<span class="math inline">\(1/\lambda\)</span> by the standard normal,
+basic, percentile, and BCa methods. Compare the intervals and explain
+why they may differ.</p>
+</div>
+<div id="answer-3-3" class="section level2">
+<h2>Answer 3</h2>
+<p>The estimation of mean time between failures <span class="math inline">\(1/\lambda\)</span> directly form the data is <span class="math inline">\(\bar X=\)</span> 108.1 . With the aid of R
+function <span class="math inline">\(\mathtt{boot}\)</span> and <span class="math inline">\(\mathtt{boot.ci}\)</span>, the four kinds of
+bootstrap conﬁdence intervals is displayed in the following table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Lower bound</th>
+<th align="right">Upper bound</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Standard Normal</td>
+<td align="right">34.5</td>
+<td align="right">181.8</td>
+</tr>
+<tr class="even">
+<td align="left">Basic</td>
+<td align="right">26.0</td>
+<td align="right">169.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Percentile</td>
+<td align="right">47.0</td>
+<td align="right">190.2</td>
+</tr>
+<tr class="even">
+<td align="left">BCa</td>
+<td align="right">57.6</td>
+<td align="right">225.8</td>
+</tr>
+</tbody>
+</table>
+<p>The standard normal method and the basic method produce confidence
+intervals with lower value, while the percentile method and its improved
+version BCa produce confidence intervals with larger value. The four
+confidence intervals are slightly different because they are generated
+on different principles.</p>
+</div>
+</div>
+<div id="homework-5" class="section level1">
+<h1>Homework 5</h1>
+<div id="question-1-4" class="section level2">
+<h2>Question 1</h2>
+<p><strong>Exercise 7.8</strong> Efron and Tibshirani discuss the scor
+(bootstrap) test score data on 88 students who took examinations in ﬁve
+subjects. The ﬁrst two tests (mechanics, vectors) were closed book and
+the last three tests (algebra, analysis, statistics) were open book.
+Each row of the data frame is a set of scores <span class="math inline">\((x_{i1},\ldots, x_{i5})\)</span> for the ith
+student. The ﬁve-dimensional scores data have a <span class="math inline">\(5\times5\)</span> covariance matrix <span class="math inline">\(\Sigma\)</span>, with positive eigenvalues <span class="math inline">\(\lambda_1 &gt;\ldots&gt;\lambda_5\)</span>. In
+principal components analysis, <span class="math display">\[\theta=\frac{\lambda_1}{\sum_{j=1}^5\lambda_j}\]</span>
+measures the proportion of variance explained by the ﬁrst principal
+component. Let <span class="math inline">\(\hat\lambda_1 &gt;\ldots&gt;
+\hat\lambda_5\)</span> be the eigenvalues of <span class="math inline">\(\hat\Sigma\)</span>, where <span class="math inline">\(\hat\Sigma\)</span> is the MLE of <span class="math inline">\(\Sigma\)</span>. Obtain the jackknife estimates of
+bias and standard error of <span class="math inline">\(\hat\theta\)</span>.</p>
+</div>
+<div id="answer-1-4" class="section level2">
+<h2>Answer 1</h2>
+<p>The code and the output is shown below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(bootstrap)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> scor</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>proportion1 <span class="ot">&lt;-</span> <span class="cf">function</span>(data,index){</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="do">## calculate the first principal component of the given data</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  S <span class="ot">&lt;-</span> <span class="fu">cov</span>(data[index,])</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  lambda <span class="ot">&lt;-</span> <span class="fu">eigen</span>(S)<span class="sc">$</span>values</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="fu">return</span>(lambda[<span class="dv">1</span>]<span class="sc">/</span><span class="fu">sum</span>(lambda))</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>} </span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>theta.hat <span class="ot">&lt;-</span> <span class="fu">proportion1</span>(data,<span class="dv">1</span><span class="sc">:</span>n)</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>theta.jack <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  theta.jack[i] <span class="ot">&lt;-</span> <span class="fu">proportion1</span>(data,(<span class="dv">1</span><span class="sc">:</span>n)[<span class="sc">-</span>i])</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>}</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>bias.jack <span class="ot">&lt;-</span> (n<span class="dv">-1</span>)<span class="sc">*</span>(<span class="fu">mean</span>(theta.jack)<span class="sc">-</span>theta.hat)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>se.jack <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((n<span class="dv">-1</span>)<span class="sc">*</span><span class="fu">mean</span>((theta.jack<span class="sc">-</span>theta.hat)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">original=</span>theta.hat,<span class="at">bias.jack=</span>bias.jack,<span class="at">se.jack=</span>se.jack),<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##  original bias.jack   se.jack 
+##    0.6191    0.0011    0.0496</code></pre>
+</div>
+<div id="question-2-4" class="section level2">
+<h2>Question 2</h2>
+<p><strong>Exercise 7.10</strong> In <em>Example 7.18</em>,
+leave-one-out (n-fold) cross validation was used to select the best
+ﬁtting model. Repeat the analysis replacing the Log-Log model with a
+cubic polynomial model. Which of the four models is selected by the
+cross validation procedure? Which model is selected according to maximum
+adjusted <span class="math inline">\(R^2\)</span>?</p>
+</div>
+<div id="answer-2-4" class="section level2">
+<h2>Answer 2</h2>
+<p>The code and the output is shown below.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(DAAG); <span class="fu">attach</span>(ironslag)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;DAAG&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:MASS&#39;:
+## 
+##     hills</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(magnetic)  </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> e2 <span class="ot">&lt;-</span> e3 <span class="ot">&lt;-</span> e4 <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  y <span class="ot">&lt;-</span> magnetic[<span class="sc">-</span>k]</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  x <span class="ot">&lt;-</span> chemical[<span class="sc">-</span>k]</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  </span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  J1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>  yhat1 <span class="ot">&lt;-</span> J1<span class="sc">$</span>coef[<span class="dv">1</span>] <span class="sc">+</span> J1<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="sc">*</span> chemical[k]</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>  e1[k] <span class="ot">&lt;-</span> magnetic[k] <span class="sc">-</span> yhat1</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>  </span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>  J2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>  yhat2 <span class="ot">&lt;-</span> J2<span class="sc">$</span>coef[<span class="dv">1</span>] <span class="sc">+</span> J2<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="sc">*</span> chemical[k] <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>    J2<span class="sc">$</span>coef[<span class="dv">3</span>] <span class="sc">*</span> chemical[k]<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>  e2[k] <span class="ot">&lt;-</span> magnetic[k] <span class="sc">-</span> yhat2</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>  </span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>  J3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(y) <span class="sc">~</span> x)</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>  logyhat3 <span class="ot">&lt;-</span> J3<span class="sc">$</span>coef[<span class="dv">1</span>] <span class="sc">+</span> J3<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="sc">*</span> chemical[k]</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>  yhat3 <span class="ot">&lt;-</span> <span class="fu">exp</span>(logyhat3)</span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>  e3[k] <span class="ot">&lt;-</span> magnetic[k] <span class="sc">-</span> yhat3</span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>  </span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>  J4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">3</span>))</span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>  yhat4 <span class="ot">&lt;-</span>  J4<span class="sc">$</span>coef[<span class="dv">1</span>] <span class="sc">+</span> J4<span class="sc">$</span>coef[<span class="dv">2</span>] <span class="sc">*</span> chemical[k] <span class="sc">+</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>    J4<span class="sc">$</span>coef[<span class="dv">3</span>] <span class="sc">*</span> chemical[k]<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> J4<span class="sc">$</span>coef[<span class="dv">4</span>] <span class="sc">*</span> chemical[k]<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>  e4[k] <span class="ot">&lt;-</span> magnetic[k] <span class="sc">-</span> yhat4</span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>}</span></code></pre></div>
+<p>The following estimates for prediction error are obtained from the
+n-fold cross validation.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(e1<span class="sc">^</span><span class="dv">2</span>), <span class="fu">mean</span>(e2<span class="sc">^</span><span class="dv">2</span>), <span class="fu">mean</span>(e3<span class="sc">^</span><span class="dv">2</span>), <span class="fu">mean</span>(e4<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 19.55644 17.85248 18.44188 18.17756</code></pre>
+<p>According to the prediction error criterion, Model 2, the quadratic
+model, would be the best ﬁt for the data.</p>
+<p>The following is the adjusted <span class="math inline">\(R^2\)</span> for the four models.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> magnetic</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> chemical</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>R21 <span class="ot">&lt;-</span> <span class="fu">summary</span>(M1)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>R22 <span class="ot">&lt;-</span> <span class="fu">summary</span>(M2)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(y) <span class="sc">~</span> x)</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>R23 <span class="ot">&lt;-</span> <span class="fu">summary</span>(M3)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">3</span>))</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>R24 <span class="ot">&lt;-</span> <span class="fu">summary</span>(M4)<span class="sc">$</span>adj.r.squared</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">max</span>(R21),<span class="fu">max</span>(R22),<span class="fu">max</span>(R23),<span class="fu">max</span>(R24))</span></code></pre></div>
+<pre><code>## [1] 0.5281545 0.5768151 0.5280556 0.5740396</code></pre>
+<p>According to maximum adjusted <span class="math inline">\(R^2\)</span> criterion, Model 2, the quadratic
+model again, would be the best ﬁt for the data.</p>
+</div>
+<div id="question-3-4" class="section level2">
+<h2>Question 3</h2>
+<p><strong>Exercise 8.1</strong> Implement the two-sample <span class="math inline">\(Cram\acute{e}r-von\;Mises\)</span> test for equal
+distributions as a permutation test. Apply the test to the data in
+<em>Examples 8.1</em> and <em>8.2</em>.</p>
+</div>
+<div id="answer-3-4" class="section level2">
+<h2>Answer 3</h2>
+<p>The code is shown as follows.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">attach</span>(chickwts)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">as.vector</span>(weight[feed <span class="sc">==</span> <span class="st">&quot;soybean&quot;</span>]))</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">as.vector</span>(weight[feed <span class="sc">==</span> <span class="st">&quot;linseed&quot;</span>]))</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y);K <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">26</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="fu">detach</span>(chickwts)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="dv">999</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">numeric</span>(R);</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>CM.stat <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>  <span class="do">## function to calculate the Cramer-von Mises statistic </span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x); m <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>  Fn <span class="ot">&lt;-</span> <span class="fu">ecdf</span>(x); Gm <span class="ot">&lt;-</span> <span class="fu">ecdf</span>(y)</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>  W2 <span class="ot">&lt;-</span> m<span class="sc">*</span>n<span class="sc">/</span>(m<span class="sc">+</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>(<span class="fu">sum</span>(<span class="fu">Fn</span>(x)<span class="sc">-</span><span class="fu">Gm</span>(x))<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="fu">sum</span>(<span class="fu">Fn</span>(y)<span class="sc">-</span><span class="fu">Gm</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>  <span class="fu">return</span>(W2)</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>} </span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="do">## implement the permutation test</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">233</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>D0 <span class="ot">&lt;-</span> <span class="fu">CM.stat</span>(x,y)</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>R) {</span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a>  <span class="co">#generate indices k for the first sample</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">sample</span>(K, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>  x1 <span class="ot">&lt;-</span> z[k]; y1 <span class="ot">&lt;-</span> z[<span class="sc">-</span>k]</span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a>  D[i] <span class="ot">&lt;-</span> <span class="fu">CM.stat</span>(x1,y1)</span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a>} </span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">c</span>(D0, D) <span class="sc">&gt;=</span> D0)</span></code></pre></div>
+<p>The approximate p-value is 0.241. which does not support the
+alternative hypothesis that distributions differ. A histogram of the
+replicates of D is displayed by</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">hist</span>(D, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="st">&quot;D&quot;</span>,<span class="at">breaks =</span> <span class="st">&quot;scott&quot;</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">6</span>,<span class="fl">0.5</span>, <span class="fu">paste0</span>(<span class="st">&quot;p.perm = &quot;</span>, p))</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>D0,<span class="at">col=</span><span class="st">&#39;red&#39;</span>,<span class="at">lwd=</span><span class="dv">2</span>)  <span class="co"># observed D</span></span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="question-4-1" class="section level2">
+<h2>Question 4</h2>
+<p><strong>Exercise 8.2</strong> Implement the bivariate Spearman rank
+correlation test for independence as a permutation test. The Spearman
+rank correlation test statistic can be obtained from function cor with
+<span class="math inline">\(\mathtt{method =
+&quot;spearman&quot;}\)</span>. Compare the achieved signiﬁcance level
+of the permutation test with the p-value reported by <span class="math inline">\(\mathtt{cor.test}\)</span> on the same
+samples.</p>
+</div>
+<div id="answer-4-1" class="section level2">
+<h2>Answer 4</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">233</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co"># generate the sample</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x,y)</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>rho.boot <span class="ot">&lt;-</span> <span class="cf">function</span>(data,ind){</span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="co"># return the Spearman rank correlation of the data</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>  <span class="fu">cor</span>(data[,<span class="dv">1</span>],data[ind,<span class="dv">2</span>],<span class="at">method=</span><span class="st">&quot;spearman&quot;</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>}</span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co"># permutation test</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>boot.obj <span class="ot">&lt;-</span> <span class="fu">boot</span>(<span class="at">data=</span>z,<span class="at">statistic=</span>rho.boot,<span class="at">sim=</span><span class="st">&quot;permutation&quot;</span>,<span class="at">R=</span><span class="dv">999</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>tb <span class="ot">&lt;-</span> <span class="fu">c</span>(boot.obj<span class="sc">$</span>t0,boot.obj<span class="sc">$</span>t) </span></code></pre></div>
+<p>The achieved p-value of the permutation test is</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(tb) <span class="sc">&gt;=</span> <span class="fu">abs</span>(boot.obj<span class="sc">$</span>t0))</span></code></pre></div>
+<pre><code>## [1] 0.146</code></pre>
+<p>The p-value reported by <span class="math inline">\(\mathtt{cor.test}\)</span> is</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">cor.test</span>(x,y,<span class="at">method=</span><span class="st">&quot;spearman&quot;</span>)<span class="sc">$</span>p.value</span></code></pre></div>
+<pre><code>## [1] 0.1368327</code></pre>
+<p>There is not much difference between the two p-values, and they both
+accept the null hypothesis at the significance level <span class="math inline">\(\alpha=0.05\)</span>. So it is to be considered
+that the two samples are unrelated.</p>
+</div>
+</div>
+<div id="homework-6" class="section level1">
+<h1>Homework 6</h1>
+<div id="question-1-5" class="section level2">
+<h2>Question 1</h2>
+<p>In Metropolis-Hastings sampler, prove that <span class="math inline">\(f\)</span> is the stationary distributuion of the
+Markov chain in the continuous situation.</p>
+</div>
+<div id="answer-1-5" class="section level2">
+<h2>Answer 1</h2>
+<p>It is sufficient to prove that for any two elements <span class="math inline">\((r,s)\)</span> of the state space of the chain,
+the balance condition (stationarity identity) <span class="math display">\[K(s,r)f(s)=K(r,s)f(r)\]</span> holds, because it
+will gives rise to the conclusion that if the pdf of <span class="math inline">\(X_n\)</span> is <span class="math inline">\(f(s)\)</span>, then the pdf of <span class="math inline">\(X_{n+1}\)</span> is <span class="math display">\[f_{n+1}(s)=\int K(r,s)f_n(r)\mathrm{d}r=\int
+K(r,s)f(r)\mathrm{d}r=\int K(s,r)f(s)\mathrm{d}r=f(s).\]</span></p>
+<p>The transition kernel is <span class="math display">\[K(r,s)=\alpha(r,s)g(s|r)+I(s=r)\left[1-\int\alpha(r,s)g(s|r)\mathrm{d}s\right],\]</span>
+where <span class="math display">\[\alpha(r,s)=\min\left\{1,\frac{f(s)g(r|s)}{f(r)g(s|r)}\right\}.\]</span>
+When <span class="math inline">\(f(s)g(r|s)\geq f(r)g(s|r)\)</span>,
+<span class="math display">\[\alpha(r,s)f(r)g(s|r)=f(r)g(s|r)=\frac{f(r)g(s|r)}{f(s)g(r|s)}f(s)g(r|s)=\alpha(s,r)f(s)g(r|s).\]</span>
+Similarly, the above formula is satisfied when <span class="math inline">\(f(s)g(r|s)&lt; f(r)g(s|r)\)</span>.</p>
+<p>Futhermore, we have <span class="math display">\[I(s=r)\left[1-\int\alpha(r,s)g(s|r)\mathrm{d}s\right]f(r)=I(r=s)\left[1-\int\alpha(s,r)g(r|s)\mathrm{d}r\right]f(s).\]</span>
+Combining these two formulas, we prove <span class="math inline">\(K(s,r)f(s)=K(r,s)f(r)\)</span>.</p>
+</div>
+<div id="question-2-5" class="section level2">
+<h2>Question 2</h2>
+<p><strong>Exercise 9.3</strong> Use the Metropolis-Hastings sampler to
+generate random variables from a standard Cauchy distribution. Discard
+the ﬁrst 1000 of the chain, and compare the deciles of the generated
+observations with the deciles of the standard Cauchy distribution (see
+<span class="math inline">\(\mathtt{qcauchy}\)</span> or <span class="math inline">\(\mathtt{qt}\)</span> with df=1). Recall that a
+Cauchy(<span class="math inline">\(\theta\)</span>, <span class="math inline">\(\eta\)</span>) distribution has density function
+<span class="math display">\[f(x)=\frac{1}{\theta\pi(1+[(x-\eta)/\theta]^2)},\quad
+-\infty&lt;x&lt;\infty,\theta&gt;0.\]</span> The standard Cauchy has the
+Cauchy(<span class="math inline">\(\theta=1\)</span>,<span class="math inline">\(\eta=0\)</span>) density. (Note that the standard
+Cauchy density is equal to the Student t density with one degree of
+freedom.)</p>
+</div>
+<div id="answer-2-5" class="section level2">
+<h2>Answer 2</h2>
+<p>Use the random walk Metropolis sampler with proposal distribution
+<span class="math inline">\(N(X_n,1)\)</span> to generate the chain
+targeting Cauchy distribution. The following R function implements the
+process.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>chain_9<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">scale=</span><span class="dv">1</span>,<span class="at">location=</span><span class="dv">0</span>, x0, N) {</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(N)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>  x[<span class="dv">1</span>] <span class="ot">&lt;-</span> x0</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(N)</span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N) {</span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, x[i<span class="dv">-1</span>], <span class="dv">1</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>    <span class="cf">if</span> (u[i] <span class="sc">&lt;=</span> <span class="fu">dcauchy</span>(y,location,scale) <span class="sc">/</span> <span class="fu">dcauchy</span>(x[i<span class="dv">-1</span>],location,scale))</span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>      x[i] <span class="ot">&lt;-</span> y  </span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>    <span class="cf">else</span> {</span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>      x[i] <span class="ot">&lt;-</span> x[i<span class="dv">-1</span>]</span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>      k <span class="ot">&lt;-</span> k <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>    }</span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>  }</span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">x=</span>x, <span class="at">k=</span>k))</span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>}</span></code></pre></div>
+<p>Then we use the Gelman-Rubin method to monitor convergence of the
+chain. The scalar summary statistic <span class="math inline">\(\phi_{ij}\)</span> is the median of the <span class="math inline">\(ith\)</span> chain up to time <span class="math inline">\(j\)</span>.</p>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>The value of <span class="math inline">\(\hat R\)</span> is below 1.2
+within 7000 iterations. Run the chain with 7000 iteration and plot the
+chain.</p>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>The deciles of the generated observations and the standard Cauchy
+distribution is shown below.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Q</th>
+<th align="right">Qrw</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">10%</td>
+<td align="right">-3.078</td>
+<td align="right">-1.925</td>
+</tr>
+<tr class="even">
+<td align="left">20%</td>
+<td align="right">-1.376</td>
+<td align="right">-1.051</td>
+</tr>
+<tr class="odd">
+<td align="left">30%</td>
+<td align="right">-0.727</td>
+<td align="right">-0.554</td>
+</tr>
+<tr class="even">
+<td align="left">40%</td>
+<td align="right">-0.325</td>
+<td align="right">-0.187</td>
+</tr>
+<tr class="odd">
+<td align="left">50%</td>
+<td align="right">0.000</td>
+<td align="right">0.145</td>
+</tr>
+<tr class="even">
+<td align="left">60%</td>
+<td align="right">0.325</td>
+<td align="right">0.504</td>
+</tr>
+<tr class="odd">
+<td align="left">70%</td>
+<td align="right">0.727</td>
+<td align="right">0.935</td>
+</tr>
+<tr class="even">
+<td align="left">80%</td>
+<td align="right">1.376</td>
+<td align="right">1.721</td>
+</tr>
+<tr class="odd">
+<td align="left">90%</td>
+<td align="right">3.078</td>
+<td align="right">3.575</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="question-3-5" class="section level2">
+<h2>Question 3</h2>
+<p><strong>Exercise 9.8</strong> Consider the bivariate density <span class="math display">\[f(x,y)\propto
+\binom{n}{x}y^{x+a-1}(1-y)^{n-x+b-1},\quad x=0.1.\ldots,n,0\leq y\leq
+1.\]</span> It can be shown that for ﬁxed <span class="math inline">\(a,b,n\)</span>,the conditional distributions are
+Binomial(<span class="math inline">\(n\)</span>, <span class="math inline">\(y\)</span>)and Beta(<span class="math inline">\(x+a\)</span>, <span class="math inline">\(n−x+b\)</span>). Use the Gibbs sampler to generate
+a chain with target joint density f(<span class="math inline">\(x\)</span>,<span class="math inline">\(y\)</span>).</p>
+</div>
+<div id="answer-3-5" class="section level2">
+<h2>Answer 3</h2>
+<p>The following R function use Gibbs sampling to generate the bivariate
+distribution in Question 3.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>chain_9<span class="fl">.8</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(a,b,n,x0,y0,N){</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>  <span class="co">#initialize constants and parameters</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  chain <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, N, <span class="dv">2</span>) <span class="co">#the chain, a bivariate sample</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>  chain[<span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(x0,y0) <span class="co">#initialize</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N) {</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>    chain[i,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>,n,chain[i<span class="dv">-1</span>,<span class="dv">2</span>])</span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>    chain[i,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>,chain[i,<span class="dv">1</span>]<span class="sc">+</span>a, n<span class="sc">-</span>chain[i,<span class="dv">1</span>]<span class="sc">+</span>b)</span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>  }</span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a>  <span class="fu">return</span>(chain)</span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a>}</span></code></pre></div>
+<p>Set <span class="math inline">\(a=2,b=3,n=10\)</span>, then use the
+Gelman-Rubin method with the mean of the <span class="math inline">\(X*Y\)</span> as scalar summary statistic.</p>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>The value of <span class="math inline">\(\hat R\)</span> is below 1.2
+within 7000 iterations.</p>
+</div>
+</div>
+<div id="homework-7" class="section level1">
+<h1>Homework 7</h1>
+<div id="question-1-6" class="section level2">
+<h2>Question 1</h2>
+<p><strong>Exercise 11.3</strong> (a)Write a function to compute the
+<span class="math inline">\(k^{th}\)</span> term in <span class="math display">\[\sum_{k=0}^{\infty}\frac{(-1)^k}{k!2^k}\frac{||a||^{2k+2}}{(2k+1)(2k+2)}\frac{\Gamma(\frac{d+1}{2})\Gamma(k+\frac{3}{2})}{\Gamma(k+\frac{d}{2}+1)},\]</span>
+where <span class="math inline">\(d \geq 1\)</span> is an integer, <span class="math inline">\(a\)</span> is a vector in <span class="math inline">\(\mathbb{R}^d\)</span>,and <span class="math inline">\(||\cdot||\)</span> denotes the Euclidean norm.
+Perform the arithmetic so that the coefficients can be computed for
+(almost) arbitrarily large <span class="math inline">\(k\)</span> and
+<span class="math inline">\(d\)</span>. (This sum converges for all
+<span class="math inline">\(a \in \mathbb{R}^d\)</span>).</p>
+<p>(b)Modify the function so that it computes and returns the sum.</p>
+<p>(c)Evaluate the sum when <span class="math inline">\(a=(1,
+2)^T\)</span>.</p>
+</div>
+<div id="answer-1-6" class="section level2">
+<h2>Answer 1</h2>
+<ol style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>xk <span class="ot">&lt;-</span> <span class="cf">function</span>(k,d,a){</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  (<span class="sc">-</span><span class="dv">1</span>)<span class="sc">^</span>k<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>k<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>k<span class="sc">+</span><span class="dv">2</span>)<span class="sc">*</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>    <span class="fu">exp</span>((k<span class="sc">+</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">log</span>(<span class="fu">sum</span>(a<span class="sc">^</span><span class="dv">2</span>))<span class="sc">+</span><span class="fu">lgamma</span>((d<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">lgamma</span>(k<span class="sc">+</span><span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>)<span class="sc">-</span><span class="fu">lgamma</span>(k<span class="sc">+</span><span class="dv">1</span>)<span class="sc">-</span>k<span class="sc">*</span><span class="fu">log</span>(<span class="dv">2</span>)<span class="sc">-</span><span class="fu">lgamma</span>(k<span class="sc">+</span>d<span class="sc">/</span><span class="dv">2</span><span class="sc">+</span><span class="dv">1</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>}</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="cf">function</span>(d,a){</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  Sn <span class="ot">&lt;-</span> <span class="dv">0</span>; x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  <span class="cf">while</span>(<span class="fu">abs</span>(x)<span class="sc">&gt;</span><span class="fl">1e-8</span> <span class="sc">&amp;</span> k<span class="sc">&lt;</span><span class="dv">1000</span>){</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">xk</span>(k,d,a)</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>    Sn <span class="ot">&lt;-</span> Sn <span class="sc">+</span> x</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>    k <span class="ot">&lt;-</span> k<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>  }</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>  <span class="fu">stopifnot</span>(k<span class="sc">&lt;</span><span class="dv">1000</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>  <span class="fu">return</span>(Sn)</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>}</span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">S</span>(<span class="at">d=</span><span class="dv">2</span>,<span class="at">a=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
+<pre><code>## [1] 1.532164</code></pre>
+</div>
+<div id="question-2-6" class="section level2">
+<h2>Question 2</h2>
+<p><strong>Exercise 11.5</strong> Write a function to solve the equation
+<span class="math display">\[\frac{2\Gamma(\frac{k}{2})}{\sqrt{\pi(k-1)}\Gamma(\frac{k-1}{2})}\int_{0}^{c_{k-1}}(1+\frac{u^2}{k-1})^{-k/2}\mathrm{d}u=\frac{2\Gamma(\frac{k+1}{2})}{\sqrt{\pi(k)}\Gamma(\frac{k}{2})}\int_{0}^{c_{k}}(1+\frac{u^2}{k})^{-(k+1)/2}\mathrm{d}u\]</span>
+for <span class="math inline">\(a\)</span>, where <span class="math display">\[c_k=\sqrt{\frac{a^2k}{k+1-a^2}}.\]</span> Compare
+the solutions with the points <span class="math inline">\(A(k)\)</span>
+in <em>Exercise 11.4</em>:</p>
+<p>Find the intersection points <span class="math inline">\(A(k)\)</span> in <span class="math inline">\((0,
+\sqrt{k})\)</span>of the curves <span class="math display">\[S_{k-1}(a)=P\left(t(k-1)&gt;\sqrt{\frac{a^2(k-1)}{k-a^2}}\right)\]</span>
+and <span class="math display">\[S_{k}(a)=P\left(t(k)&gt;\sqrt{\frac{a^2k}{k+1-a^2}}\right)\]</span>
+for <span class="math inline">\(k=4:25, 100, 500, 1000\)</span>, where
+<span class="math inline">\(t(k)\)</span> is a Student <span class="math inline">\(t\)</span> random variable with <span class="math inline">\(k\)</span> degrees of freedom.</p>
+</div>
+<div id="answer-2-6" class="section level2">
+<h2>Answer 2</h2>
+<p>In <em>exercise 11.4</em>, the point <span class="math inline">\(A(k)\)</span> can be computed as follows, where
+the range of the root is reduced to <span class="math inline">\((0.1,0.8\sqrt{k})\)</span> in order to avoid the
+calculation error at the boundary.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>ck <span class="ot">&lt;-</span> <span class="cf">function</span>(k,a){</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>  <span class="fu">sqrt</span>(a<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>k<span class="sc">/</span>(k<span class="sc">+</span><span class="dv">1</span><span class="sc">-</span>a<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>}</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>  Sk <span class="ot">&lt;-</span> <span class="cf">function</span>(k,a){</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>    <span class="fu">pt</span>(<span class="fu">ck</span>(k,a), <span class="at">df=</span>k, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>  }</span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">uniroot</span>(<span class="cf">function</span>(a){<span class="fu">Sk</span>(k<span class="dv">-1</span>,a)<span class="sc">-</span><span class="fu">Sk</span>(k,a)}, <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.8</span><span class="sc">*</span><span class="fu">sqrt</span>(k)))  </span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>  <span class="fu">return</span>(res<span class="sc">$</span>root)</span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>}</span></code></pre></div>
+<p>In <em>exercise 11.5</em>, we use numerical integrals as a substitute
+for the probability in <em>exercise 11.4</em>, which increases the error
+of the calculation, especially at the boundary. Therefore, we need to
+further compress the root interval to <span class="math inline">\((0.1,\lg(k)/3.5)\)</span> to reduce the effect of
+error (otherwise the program will report an error because the function
+has the same sign at two endpoints). Moreover, the logit transformation
+is used to amplify the difference in the probability in order to better
+find the root of the equation.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>A2 <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>  Sk <span class="ot">&lt;-</span> <span class="cf">function</span>(k,a){</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>    <span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="fu">lgamma</span>((k<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)<span class="sc">-</span><span class="fu">lgamma</span>(k<span class="sc">/</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sqrt</span>(pi<span class="sc">*</span>k)<span class="sc">*</span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>      <span class="fu">integrate</span>(<span class="cf">function</span>(u){(<span class="dv">1</span><span class="sc">+</span>u<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>k)<span class="sc">^</span>(<span class="sc">-</span>(k<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)},<span class="at">lower=</span><span class="dv">0</span>,<span class="at">upper=</span><span class="fu">ck</span>(k,a))<span class="sc">$</span>value</span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>  }</span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>  logit <span class="ot">&lt;-</span> <span class="cf">function</span>(u){<span class="fu">log</span>(u<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>u))}</span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">uniroot</span>(<span class="cf">function</span>(a){<span class="fu">logit</span>(<span class="fu">Sk</span>(k<span class="dv">-1</span>,a))<span class="sc">-</span><span class="fu">logit</span>(<span class="fu">Sk</span>(k,a))}, <span class="fu">c</span>(<span class="fl">0.1</span>,(<span class="dv">1</span><span class="sc">-</span><span class="fu">log10</span>(k)<span class="sc">/</span><span class="fl">3.5</span>)<span class="sc">*</span><span class="fu">sqrt</span>(k)))  </span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>  <span class="fu">return</span>(res<span class="sc">$</span>root)</span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a>}</span></code></pre></div>
+<p>The output is shown in the following table.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">k</th>
+<th align="right">A(k) in Ex 11.4</th>
+<th align="right">A(k) in Ex 11.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">1.492103</td>
+<td align="right">1.492105</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">1.533558</td>
+<td align="right">1.533556</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">1.562755</td>
+<td align="right">1.562749</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">1.584429</td>
+<td align="right">1.584429</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">1.601193</td>
+<td align="right">1.601167</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">1.614512</td>
+<td align="right">1.614511</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">1.625400</td>
+<td align="right">1.625361</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">1.634409</td>
+<td align="right">1.634409</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">1.642034</td>
+<td align="right">1.642027</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="right">1.648542</td>
+<td align="right">1.648543</td>
+</tr>
+<tr class="odd">
+<td align="right">14</td>
+<td align="right">1.654169</td>
+<td align="right">1.654165</td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="right">1.659097</td>
+<td align="right">1.659083</td>
+</tr>
+<tr class="odd">
+<td align="right">16</td>
+<td align="right">1.663408</td>
+<td align="right">1.663416</td>
+</tr>
+<tr class="even">
+<td align="right">17</td>
+<td align="right">1.667263</td>
+<td align="right">1.667263</td>
+</tr>
+<tr class="odd">
+<td align="right">18</td>
+<td align="right">1.670695</td>
+<td align="right">1.670702</td>
+</tr>
+<tr class="even">
+<td align="right">19</td>
+<td align="right">1.673831</td>
+<td align="right">1.673795</td>
+</tr>
+<tr class="odd">
+<td align="right">20</td>
+<td align="right">1.676621</td>
+<td align="right">1.676591</td>
+</tr>
+<tr class="even">
+<td align="right">21</td>
+<td align="right">1.679154</td>
+<td align="right">1.679133</td>
+</tr>
+<tr class="odd">
+<td align="right">22</td>
+<td align="right">1.681472</td>
+<td align="right">1.681453</td>
+</tr>
+<tr class="even">
+<td align="right">23</td>
+<td align="right">1.683600</td>
+<td align="right">1.683579</td>
+</tr>
+<tr class="odd">
+<td align="right">24</td>
+<td align="right">1.685568</td>
+<td align="right">1.685534</td>
+</tr>
+<tr class="even">
+<td align="right">25</td>
+<td align="right">1.687355</td>
+<td align="right">1.687338</td>
+</tr>
+<tr class="odd">
+<td align="right">100</td>
+<td align="right">1.720624</td>
+<td align="right">1.720616</td>
+</tr>
+<tr class="even">
+<td align="right">500</td>
+<td align="right">1.729747</td>
+<td align="right">1.729743</td>
+</tr>
+<tr class="odd">
+<td align="right">1000</td>
+<td align="right">1.730885</td>
+<td align="right">1.730896</td>
+</tr>
+</tbody>
+</table>
+<p>The output of <em>exercise 11.4</em> and <em>exercise 11.5</em> is a
+little bit different but almost the same.</p>
+</div>
+<div id="question-3-6" class="section level2">
+<h2>Question 3</h2>
+<p>Suppose <span class="math inline">\(T_1,\ldots, T_n\)</span> are
+i.i.d. samples drawn from the exponential distribution with expectation
+<span class="math inline">\(\lambda\)</span>.Those values greater than
+<span class="math inline">\(\tau\)</span> are not observed due to right
+censorship, so that the observed values are <span class="math inline">\(Y_i = T_iI(T_i\leq\tau)+ \tau I(T_i &gt;\tau), i =
+1,\ldots, n\)</span>. Suppose <span class="math inline">\(\tau=1\)</span> and the observed <span class="math inline">\(Y_i\)</span> values are as follows: <span class="math display">\[0.54, 0.48, 0.33, 0.43, 1.00, 1.00, 0.91, 1.00,
+0.21, 0.85\]</span> Use the E-M algorithm to estimate <span class="math inline">\(\lambda\)</span>, compare your result with the
+observed data MLE.</p>
+</div>
+<div id="answer-3-6" class="section level2">
+<h2>Answer 3</h2>
+<p>In order to apply the EM algorithm, let’s first clarify some
+notations. <span class="math inline">\(\textbf{X}=(X_1,\ldots,X_{n_1})\)</span> denote
+the observed data, corresponding to those <span class="math inline">\(T_i &lt; \tau,\;Y_i&lt;\tau\)</span>, while <span class="math inline">\(\textbf{Z}=(Z_1,\ldots,Z_{n_2)}\)</span> denote
+the missing data, corresponding to those <span class="math inline">\(T_i
+\geq \tau,\;Y_i=\tau\)</span>. <span class="math inline">\(n=n_1+n_2\)</span>.</p>
+<p>The likelihood based on <span class="math inline">\((\textbf{X},\textbf{Z})\)</span> is <span class="math display">\[L(\lambda;\textbf{X},\textbf{Z})=\prod_{i=1}^{n_1}\lambda\exp(-\lambda
+X_i)\cdot\prod_{j=1}^{n_2}\lambda\exp(-\lambda
+Z_j)=\lambda^{n}\exp(-\lambda(n_1\bar X+n_2\bar Z))\]</span> where <span class="math inline">\(\bar X=\frac{1}{n_1}\sum_{i=1}^{n_1}X_i\)</span>,
+<span class="math inline">\(\bar
+Z=\frac{1}{n_2}\sum_{j=1}^{n_2}Z_j\)</span>.</p>
+<p>Note that <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Z}\)</span> is independent, the
+conditional density of <span class="math inline">\(\mathbf{Z}\)</span>
+given <span class="math inline">\(\mathbf{X}\)</span> and parameter
+<span class="math inline">\(\lambda_0\)</span> is <span class="math display">\[f(\textbf{z}|\textbf{x},\lambda_0)=\prod_{j=1}^{n_2}\frac{\lambda_0\exp(-\lambda_0z_j)}{\exp(-\lambda_0\tau)}=\lambda_0^{n_2}\exp(-\lambda_0n_2(\bar
+z-\tau)),\]</span> and the conditional expectation is <span class="math display">\[E(\textbf{Z}|\textbf{X},\lambda_0)=\frac{1}{\lambda_0}+\tau.\]</span></p>
+<p>Then E-step gives <span class="math display">\[l_0(\lambda;\textbf{X})=E_{\lambda_0}[\log
+L(\lambda;\textbf{X},\textbf{Z})|\textbf{X}]=E[n\log\lambda-\lambda(n_1\bar
+X+n_2\bar Z)|\textbf{X}]=n\log\lambda-\lambda(n_1\bar
+X+n_2(\frac{1}{\lambda_0}+\tau)).\]</span></p>
+<p>M-step maximaizes <span class="math inline">\(l_0(\lambda;\textbf{X})\)</span> with respect to
+<span class="math inline">\(\lambda\)</span> and get <span class="math display">\[\lambda_1=\frac{n}{n_1\bar
+X+n_2\tau+\frac{n_2}{\lambda_0}}.\]</span></p>
+<p>Replace <span class="math inline">\(\lambda_0\)</span> with <span class="math inline">\(\lambda_1\)</span>, and repeat this process. We go
+on to prove that this process will eventually converge and find the
+convergence value.</p>
+<p>Denote <span class="math inline">\(a=\frac{n_2}{n}\)</span>, <span class="math inline">\(b=\frac{n_1\bar X+n_2\tau}{n}\)</span>, and <span class="math display">\[f(x)=\frac{n}{n_1\bar
+X+n_2\tau+\frac{n_2}{x}}=\frac{x}{a+bx},\quad x&gt;0\]</span> Then the
+problem is simplified to prove the convergence of <span class="math inline">\(\{x_n\}\)</span> when <span class="math inline">\(x_n=f(x_{n-1})\)</span>.</p>
+<p>Note that <span class="math inline">\(f(x)\)</span> is strictly
+incresing in <span class="math inline">\((0,+\infty)\)</span>, and <span class="math inline">\(f(x)&gt;x\)</span> is equivalent to <span class="math inline">\(x&lt;\frac{1-a}{b}\)</span>, it can be proved by
+induction that</p>
+<ul>
+<li><p>If <span class="math inline">\(x_0 &lt; \frac{1-a}{b}\)</span>,
+then <span class="math inline">\(x_n\)</span> increases monotonically,
+and <span class="math inline">\(x_n&lt;\frac{1-a}{b}\)</span>.</p></li>
+<li><p>If <span class="math inline">\(x_0 &gt; \frac{1-a}{b}\)</span>,
+then <span class="math inline">\(x_n\)</span> decreases monotonically,
+and <span class="math inline">\(x_n&gt;\frac{1-a}{b}\)</span>.</p></li>
+</ul>
+<p>So <span class="math inline">\(X_n\)</span> converges in both case.
+Then we have <span class="math inline">\(x_n\to \frac{1-a}{b}\)</span>
+by taking the limit on both sides of <span class="math inline">\(x_n=f(x_{n-1})\)</span>.</p>
+<p>Back to the original problem, we now know that the sequence of <span class="math inline">\(\lambda\)</span> would eventually converge to
+<span class="math display">\[\frac{1-a}{b}=\frac{n_1}{n_1\bar
+X+n_2\tau}=\frac{n_1}{\sum_{i=1}^n T_i}=1.037,\]</span> which is smaller
+than the observed data MLE <span class="math display">\[\tilde\lambda=\frac{n}{\sum_{i=1}^n
+T_i}=1.867.\]</span></p>
+</div>
+</div>
+<div id="homework-8" class="section level1">
+<h1>Homework 8</h1>
+<div id="question-1-7" class="section level2">
+<h2>Question 1</h2>
+<p><strong>Exercise 11.7</strong> Use the simplex algorithm to solve the
+following problem.</p>
+<p>Minimize <span class="math inline">\(4x+2y+9z\)</span> subject to
+<span class="math display">\[\begin{align*}
+&amp;2x + y + z ≤ 2 \\
+&amp;x − y +3z ≤ 3 \\
+&amp;x ≥ 0,y ≥ 0,z ≥ 0.
+\end{align*}\]</span></p>
+</div>
+<div id="answer-1-7" class="section level2">
+<h2>Answer 1</h2>
+<p>Use <span class="math inline">\(\mathtt{simplex}\)</span> function in
+<span class="math inline">\(\mathtt{boot}\)</span> to implement the
+simplex algorithm.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>A1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="fu">simplex</span>(<span class="at">a =</span> a, <span class="at">A1 =</span> A1, <span class="at">b1 =</span> b1)</span></code></pre></div>
+<pre><code>## 
+## Linear Programming Results
+## 
+## Call : simplex(a = a, A1 = A1, b1 = b1)
+## 
+## Minimization Problem with Objective Function Coefficients
+## x1 x2 x3 
+##  4  2  9 
+## 
+## 
+## Optimal solution has the following values
+## x1 x2 x3 
+##  0  0  0 
+## The optimal value of the objective  function is 0.</code></pre>
+<p>The minimum value <span class="math inline">\(0\)</span> is obtained
+at <span class="math inline">\(x=0,y=0,z=0\)</span>.</p>
+</div>
+<div id="question-2-7" class="section level2">
+<h2>Question 2</h2>
+<p><strong>Exercise 11.1.3</strong> Use both for loops and <span class="math inline">\(\mathtt{lapply()}\)</span> to fit linear models to
+the <span class="math inline">\(\mathtt{mtcars}\)</span> using the
+formulas stored in this list:</p>
+<p><span class="math display">\[\begin{align*}
+\texttt{fo}&amp;\texttt{rmulas &lt;- list(} \\
+&amp;\texttt{mpg ~ I(1 /disp),} \\
+&amp;\texttt{mpg ~ disp,} \\
+&amp;\texttt{mpg ~ disp + wt,} \\
+&amp;\texttt{mpg ~ I(1 /disp) + wt} \\
+\texttt{)}\; &amp;
+\end{align*}\]</span></p>
+</div>
+<div id="answer-2-7" class="section level2">
+<h2>Answer 2</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>formulas <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>  mpg <span class="sc">~</span> disp,</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>  mpg <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span> <span class="sc">/</span> disp),</span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>  mpg <span class="sc">~</span> disp <span class="sc">+</span> wt,</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>  mpg <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span> <span class="sc">/</span> disp) <span class="sc">+</span> wt</span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>)</span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a><span class="do">## for loops</span></span>
+<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="fu">length</span>(formulas))</span>
+<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(formulas)){</span>
+<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a>  models[[i]] <span class="ot">&lt;-</span> <span class="fu">lm</span>(formulas[[i]], <span class="at">data =</span> mtcars)</span>
+<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a>}</span>
+<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a><span class="do">## lapply()</span></span>
+<span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a>models <span class="ot">&lt;-</span> <span class="fu">lapply</span>(formulas, lm, <span class="at">data =</span> mtcars)</span></code></pre></div>
+</div>
+<div id="question-3-7" class="section level2">
+<h2>Question 3</h2>
+<p><strong>Exercise 11.1.4</strong> Fit the model <span class="math inline">\(\texttt{mpg ~ disp}\)</span> to each of the
+bootstrap replicates of <span class="math inline">\(\texttt{mtcars}\)</span> in the list below by
+using a for loop and <span class="math inline">\(\mathtt{lapply()}\)</span>. Can you do it without
+an anonymous function? <span class="math display">\[\begin{align*}
+\texttt{bo}&amp;\texttt{otstraps &lt;- lapply(1:10, function(i) \{} \\
+&amp;\texttt{rows &lt;- sample(1:nrow(mtcars), rep = TRUE)} \\
+&amp;\texttt{mtcars[rows, ]} \\
+\texttt{\})}&amp;
+\end{align*}\]</span></p>
+</div>
+<div id="answer-3-7" class="section level2">
+<h2>Answer 3</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>bootstraps <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>  rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(mtcars), <span class="at">rep =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>  mtcars[rows, ]</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a>})</span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a><span class="do">## for loop</span></span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="fu">length</span>(bootstraps))</span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(bootstraps)){</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>  fits[[i]] <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> bootstraps[[i]])</span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>}</span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a><span class="do">## lapply() </span></span>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bootstraps, lm, <span class="at">formula =</span> mpg <span class="sc">~</span> disp) <span class="co"># no anonymous function</span></span></code></pre></div>
+</div>
+<div id="question-4-2" class="section level2">
+<h2>Question 4</h2>
+<p><strong>Exercise 11.1.5</strong> For each model in the previous two
+exercises, extract <span class="math inline">\(R^2\)</span> using the
+function below.</p>
+<p><span class="math inline">\(\texttt{rsq &lt;- function(mod)
+summary(mod)\$r.squared}\)</span></p>
+</div>
+<div id="answer-4-2" class="section level2">
+<h2>Answer 4</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="cf">function</span>(mod) <span class="fu">summary</span>(mod)<span class="sc">$</span>r.squared</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>rsq_3 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(models, rsq)  </span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>rsq_4 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(fits, rsq)</span></code></pre></div>
+</div>
+<div id="question-5" class="section level2">
+<h2>Question 5</h2>
+<p><strong>Exercise 11.2.3</strong> The following code simulates the
+performance of a t-test for non-normal data. Use <span class="math inline">\(\texttt{sapply()}\)</span> and an anonymous
+function to extract the p-value from every trial.</p>
+<p><span class="math display">\[\begin{align*}
+\texttt{tr}&amp;\texttt{ials &lt;- replicate(} \\
+&amp;\texttt{100,} \\
+&amp;\texttt{t.test(rpois(10, 10), rpois(7, 10)),} \\
+&amp;\texttt{simplify = FALSE} \\
+\texttt{)}\; &amp;
+\end{align*}\]</span></p>
+<p>Extra challenge: get rid of the anonymous function by using <span class="math inline">\(\texttt{[[}\)</span> directly.</p>
+</div>
+<div id="answer-5" class="section level2">
+<h2>Answer 5</h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>trials <span class="ot">&lt;-</span> <span class="fu">replicate</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>  <span class="dv">100</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="fu">rpois</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="fu">rpois</span>(<span class="dv">7</span>, <span class="dv">10</span>)),</span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>  <span class="at">simplify =</span> <span class="cn">FALSE</span></span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>)</span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="do">## use an anonymous function</span></span>
+<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>pvalues <span class="ot">&lt;-</span> <span class="fu">sapply</span>(trials, <span class="cf">function</span>(res) res<span class="sc">$</span>p.value)</span>
+<span id="cb31-9"><a href="#cb31-9" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" tabindex="-1"></a><span class="do">## get rid of the anonymous function </span></span>
+<span id="cb31-11"><a href="#cb31-11" tabindex="-1"></a>pvalues <span class="ot">&lt;-</span> <span class="fu">sapply</span>(trials, <span class="st">`</span><span class="at">[[</span><span class="st">`</span>, <span class="st">&quot;p.value&quot;</span>)</span></code></pre></div>
+</div>
+<div id="question-6" class="section level2">
+<h2>Question 6</h2>
+<p><strong>Exercise 11.2.6</strong> Implement a combination of <span class="math inline">\(\texttt{Map()}\)</span> and <span class="math inline">\(\texttt{vapply()}\)</span> to create an <span class="math inline">\(\texttt{lapply()}\)</span> variant that iterates
+in parallel over all of its inputs and stores its outputs in a vector
+(or a matrix). What arguments should the function take?</p>
+</div>
+<div id="answer-6" class="section level2">
+<h2>Answer 6</h2>
+<p>The arguments include the function, the vectors, the pattern of the
+value and the cores used to parallel. The implementation is as follows.
+In a nutshell, first use mcMap to get a list of the results, and then
+use vapply to convert the results into the desired pattern</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>mc.Map.vapply <span class="ot">&lt;-</span> <span class="cf">function</span>(FUN, ..., FUN.VALUE, <span class="at">mc.cores =</span> <span class="dv">1</span>){</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>  FUN <span class="ot">&lt;-</span> <span class="fu">match.fun</span>(FUN)</span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">mcMap</span>(FUN, ..., <span class="at">mc.cores =</span> mc.cores)</span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a>  <span class="fu">vapply</span>(res, <span class="cf">function</span>(x) x, <span class="at">FUN.VALUE =</span> FUN.VALUE)</span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="question-7" class="section level2">
+<h2>Question 7</h2>
+<p><strong>Exercise 17.5.4</strong> Make a faster version of <span class="math inline">\(\texttt{chisq.test()}\)</span> that only computes
+the chi-square test statistic when the input is two numeric vectors with
+no missing values. You can try simplifying <span class="math inline">\(\texttt{chisq.test()}\)</span> or by coding from
+the mathematical definition.</p>
+</div>
+<div id="answer-7" class="section level2">
+<h2>Answer 7</h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>chisq.test2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(x) <span class="sc">==</span> <span class="fu">length</span>(y))</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>  mat.o <span class="ot">&lt;-</span> <span class="fu">table</span>(x, y)</span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">prod</span>(<span class="fu">dim</span>(mat.o) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a>  </span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>  xsum <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(mat.o)</span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a>  ysum <span class="ot">&lt;-</span> <span class="fu">colSums</span>(mat.o)</span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">sum</span>(xsum)</span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a>  mat.e <span class="ot">&lt;-</span> <span class="fu">outer</span>(xsum, ysum, <span class="st">&quot;*&quot;</span>)<span class="sc">/</span>n</span>
+<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a>  X2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((mat.o<span class="sc">-</span>mat.e)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>mat.e)</span>
+<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a>  </span>
+<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">test.statistic =</span> X2, <span class="at">df =</span> df, </span>
+<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a>              <span class="at">p_value =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(X2, df)))</span>
+<span id="cb33-14"><a href="#cb33-14" tabindex="-1"></a>}</span>
+<span id="cb33-15"><a href="#cb33-15" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">233</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1000</span>,<span class="dv">3</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">1000</span>,<span class="dv">5</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" tabindex="-1"></a><span class="fu">chisq.test</span>(x, y)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  x and y
+## X-squared = 92.057, df = 117, p-value = 0.9572</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="fu">chisq.test2</span>(x, y)</span></code></pre></div>
+<pre><code>## $test.statistic
+## [1] 92.05652
+## 
+## $df
+## [1] 117
+## 
+## $p_value
+## [1] 0.9571946</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="fu">library</span>(microbenchmark)</span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a><span class="fu">microbenchmark</span>(<span class="fu">chisq.test</span>(x, y), <span class="fu">chisq.test2</span>(x, y))</span></code></pre></div>
+<pre><code>## Unit: microseconds
+##               expr     min       lq    mean   median       uq      max neval
+##   chisq.test(x, y) 827.002 868.0505 937.773 895.2515 937.5505 1542.001   100
+##  chisq.test2(x, y) 343.301 365.3010 392.865 377.0510 397.5510  722.201   100</code></pre>
+</div>
+<div id="question-8" class="section level2">
+<h2>Question 8</h2>
+<p><strong>Exercise 17.5.5</strong> Can you make a faster version of
+<span class="math inline">\(\texttt{table()}\)</span> for the case of an
+input of two integer vectors with no missing values? Can you use it to
+speed up your chi-square test?</p>
+</div>
+<div id="answer-8" class="section level2">
+<h2>Answer 8</h2>
+<p>A faster version of <span class="math inline">\(\texttt{table()}\)</span>: (By simplifying the
+body of <span class="math inline">\(\texttt{table()}\)</span>)</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>table2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(x) <span class="sc">==</span> <span class="fu">length</span>(y))</span>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>  fx <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(x); fy <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(y)</span>
+<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a>  lx <span class="ot">&lt;-</span> <span class="fu">levels</span>(fx); ly <span class="ot">&lt;-</span> <span class="fu">levels</span>(fy)</span>
+<span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a>  bin <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(fx) <span class="sc">-</span> <span class="dv">1</span><span class="dt">L</span>) <span class="sc">+</span> <span class="fu">length</span>(lx) <span class="sc">*</span> (<span class="fu">as.numeric</span>(fy) <span class="sc">-</span> <span class="dv">1</span><span class="dt">L</span>) <span class="sc">+</span> <span class="dv">1</span><span class="dt">L</span></span>
+<span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">tabulate</span>(bin, <span class="fu">length</span>(lx) <span class="sc">*</span> <span class="fu">length</span>(ly)), <span class="fu">length</span>(lx), <span class="fu">length</span>(ly))</span>
+<span id="cb39-7"><a href="#cb39-7" tabindex="-1"></a>  <span class="fu">dimnames</span>(out) <span class="ot">&lt;-</span> <span class="fu">list</span>(lx, ly)</span>
+<span id="cb39-8"><a href="#cb39-8" tabindex="-1"></a>  <span class="fu">class</span>(out) <span class="ot">&lt;-</span> <span class="st">&quot;table&quot;</span></span>
+<span id="cb39-9"><a href="#cb39-9" tabindex="-1"></a>  out</span>
+<span id="cb39-10"><a href="#cb39-10" tabindex="-1"></a>}</span>
+<span id="cb39-11"><a href="#cb39-11" tabindex="-1"></a><span class="fu">table</span>(x,y)</span></code></pre></div>
+<pre><code>##    y
+## x    0  1  2  3  4  5  6  7  8  9 10 11 12 13
+##   0  0  4  1  4  7  8  5  3  7  2  1  0  0  0
+##   1  3  4  6 24 23 18 17 12  6  7  3  1  0  0
+##   2  2 10 27 39 38 37 35 24 13  5  3  5  2  0
+##   3  2  7 19 35 41 40 30 27 11  7  3  2  2  2
+##   4  1  9 13 24 28 35 16 19 16  9  1  0  3  0
+##   5  1  4 12 16 17 18 17 13  5  5  2  1  0  0
+##   6  1  1  4  8  6  8  6  6  4  2  3  0  0  0
+##   7  0  1  1  5  1  5  2  4  1  0  1  1  0  0
+##   8  0  0  1  1  3  0  3  0  0  1  0  0  0  0
+##   9  0  0  0  0  0  1  0  0  0  0  0  0  0  0</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="fu">table2</span>(x,y)</span></code></pre></div>
+<pre><code>##    0  1  2  3  4  5  6  7  8  9 10 11 12 13
+## 0  0  4  1  4  7  8  5  3  7  2  1  0  0  0
+## 1  3  4  6 24 23 18 17 12  6  7  3  1  0  0
+## 2  2 10 27 39 38 37 35 24 13  5  3  5  2  0
+## 3  2  7 19 35 41 40 30 27 11  7  3  2  2  2
+## 4  1  9 13 24 28 35 16 19 16  9  1  0  3  0
+## 5  1  4 12 16 17 18 17 13  5  5  2  1  0  0
+## 6  1  1  4  8  6  8  6  6  4  2  3  0  0  0
+## 7  0  1  1  5  1  5  2  4  1  0  1  1  0  0
+## 8  0  0  1  1  3  0  3  0  0  1  0  0  0  0
+## 9  0  0  0  0  0  1  0  0  0  0  0  0  0  0</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="fu">microbenchmark</span>(<span class="fu">table</span>(x,y), <span class="fu">table2</span>(x,y))</span></code></pre></div>
+<pre><code>## Unit: microseconds
+##          expr     min      lq    mean   median      uq   max neval
+##   table(x, y) 272.301 287.300 307.463 297.6515 317.400 502.0   100
+##  table2(x, y) 151.601 169.451 181.899 179.5500 189.001 326.4   100</code></pre>
+<p>A faster version of <span class="math inline">\(\texttt{chisq.test2()}\)</span>:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>chisq.test3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y){</span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(x) <span class="sc">==</span> <span class="fu">length</span>(y))</span>
+<span id="cb45-3"><a href="#cb45-3" tabindex="-1"></a>  mat.o <span class="ot">&lt;-</span> <span class="fu">table2</span>(x, y)</span>
+<span id="cb45-4"><a href="#cb45-4" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">prod</span>(<span class="fu">dim</span>(mat.o) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" tabindex="-1"></a>  </span>
+<span id="cb45-6"><a href="#cb45-6" tabindex="-1"></a>  xsum <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(mat.o)</span>
+<span id="cb45-7"><a href="#cb45-7" tabindex="-1"></a>  ysum <span class="ot">&lt;-</span> <span class="fu">colSums</span>(mat.o)</span>
+<span id="cb45-8"><a href="#cb45-8" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">sum</span>(xsum)</span>
+<span id="cb45-9"><a href="#cb45-9" tabindex="-1"></a>  mat.e <span class="ot">&lt;-</span> <span class="fu">outer</span>(xsum, ysum, <span class="st">&quot;*&quot;</span>)<span class="sc">/</span>n</span>
+<span id="cb45-10"><a href="#cb45-10" tabindex="-1"></a>  X2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((mat.o<span class="sc">-</span>mat.e)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>mat.e)</span>
+<span id="cb45-11"><a href="#cb45-11" tabindex="-1"></a>  </span>
+<span id="cb45-12"><a href="#cb45-12" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">test.statistic =</span> X2, <span class="at">df =</span> df, </span>
+<span id="cb45-13"><a href="#cb45-13" tabindex="-1"></a>              <span class="at">p_value =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(X2, df)))</span>
+<span id="cb45-14"><a href="#cb45-14" tabindex="-1"></a>}</span>
+<span id="cb45-15"><a href="#cb45-15" tabindex="-1"></a><span class="fu">chisq.test3</span>(x, y)</span></code></pre></div>
+<pre><code>## $test.statistic
+## [1] 92.05652
+## 
+## $df
+## [1] 117
+## 
+## $p_value
+## [1] 0.9571946</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="fu">microbenchmark</span>(<span class="fu">chisq.test</span>(x, y), <span class="fu">chisq.test2</span>(x, y), <span class="fu">chisq.test3</span>(x, y))</span></code></pre></div>
+<pre><code>## Unit: microseconds
+##               expr     min      lq     mean   median      uq      max neval
+##   chisq.test(x, y) 797.002 846.601 912.0661 875.9005 915.551 1595.302   100
+##  chisq.test2(x, y) 335.800 355.601 376.3151 367.7510 383.251  591.001   100
+##  chisq.test3(x, y) 212.602 232.001 248.4740 246.1510 259.351  431.102   100</code></pre>
+</div>
+</div>
+<div id="homework-9" class="section level1">
+<h1>Homework 9</h1>
+<div id="question-9" class="section level2">
+<h2>Question</h2>
+<ul>
+<li><p>Write an Rcpp function for <em>Exercise 9.8</em> (page 278,
+Statistical Computing with R).</p></li>
+<li><p>Compare the corresponding generated random numbers with those by
+the R function you wrote using the function “qqplot”.</p></li>
+<li><p>Campare the computation time of the two functions with the
+function “microbenchmark”.</p></li>
+<li><p>Comments your results</p></li>
+</ul>
+</div>
+<div id="answer-9" class="section level2">
+<h2>Answer</h2>
+<p>Recopy <em>Exercise 9.8</em>:</p>
+<blockquote>
+<p><strong>Exercise 9.8</strong> Consider the bivariate density <span class="math display">\[f(x,y)\propto
+\binom{n}{x}y^{x+a-1}(1-y)^{n-x+b-1},\quad x=0.1.\ldots,n,0\leq y\leq
+1.\]</span> It can be shown that for ﬁxed <span class="math inline">\(a,b,n\)</span>,the conditional distributions are
+Binomial(<span class="math inline">\(n\)</span>, <span class="math inline">\(y\)</span>)and Beta(<span class="math inline">\(x+a\)</span>, <span class="math inline">\(n−x+b\)</span>). Use the Gibbs sampler to generate
+a chain with target joint density <span class="math inline">\(f(x,y)\)</span>.</p>
+</blockquote>
+<p>The following cpp function <span class="math inline">\(\texttt{gibbsC}\)</span> completes <em>Exercise
+9.8</em> and is stored in the file “gibbsC.cpp”.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="fu">library</span>(Rcpp)</span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="fu">cppFunction</span>(<span class="st">&quot;</span></span>
+<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a><span class="st">NumericMatrix gibbsC(int a, int b, int n, int N) {</span></span>
+<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a><span class="st">  NumericMatrix mat(N, 2);</span></span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a><span class="st">  double x = n / 2, y = 0.5;</span></span>
+<span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a><span class="st">  mat(0, 0) = x; mat(0, 1) = y;</span></span>
+<span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a><span class="st">  for(int i=1; i&lt;N; i++){</span></span>
+<span id="cb49-8"><a href="#cb49-8" tabindex="-1"></a><span class="st">      x = rbinom(1, n, y)[0];</span></span>
+<span id="cb49-9"><a href="#cb49-9" tabindex="-1"></a><span class="st">    y = rbeta(1, x + a, n - x + b)[0];</span></span>
+<span id="cb49-10"><a href="#cb49-10" tabindex="-1"></a><span class="st">    mat(i, 0) = x; mat(i, 1) = y;</span></span>
+<span id="cb49-11"><a href="#cb49-11" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb49-12"><a href="#cb49-12" tabindex="-1"></a><span class="st">  return(mat);</span></span>
+<span id="cb49-13"><a href="#cb49-13" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb49-14"><a href="#cb49-14" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
+<p>Similarly, the corresponding R function <span class="math inline">\(\texttt{gibbsR}\)</span> is as follows and is
+stored in the file “gibbsR.cpp”.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a>gibbsR <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b, n, N){</span>
+<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a>  chain <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, N, <span class="dv">2</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">round</span>(n<span class="sc">/</span><span class="dv">2</span>); y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>;</span>
+<span id="cb50-4"><a href="#cb50-4" tabindex="-1"></a>  chain[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y) </span>
+<span id="cb50-5"><a href="#cb50-5" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N) {</span>
+<span id="cb50-6"><a href="#cb50-6" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, n, y)</span>
+<span id="cb50-7"><a href="#cb50-7" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>, x <span class="sc">+</span> a, n <span class="sc">-</span> x <span class="sc">+</span> b) </span>
+<span id="cb50-8"><a href="#cb50-8" tabindex="-1"></a>    chain[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y)</span>
+<span id="cb50-9"><a href="#cb50-9" tabindex="-1"></a>  }</span>
+<span id="cb50-10"><a href="#cb50-10" tabindex="-1"></a>  <span class="fu">return</span>(chain)</span>
+<span id="cb50-11"><a href="#cb50-11" tabindex="-1"></a>}</span></code></pre></div>
+<p>We then call <span class="math inline">\(\texttt{gibbsR}\)</span> and
+<span class="math inline">\(\texttt{gibbsC}\)</span> respectively to
+generate a chain with length 3000 and burn-in at 1000.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="fu">library</span>(Rcpp)</span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a>burn <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">3000</span></span>
+<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">233</span>)</span>
+<span id="cb51-6"><a href="#cb51-6" tabindex="-1"></a>chainR <span class="ot">&lt;-</span> <span class="fu">gibbsR</span>(<span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">3</span>, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">N =</span> N)[(burn <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">:</span> N, ]</span>
+<span id="cb51-7"><a href="#cb51-7" tabindex="-1"></a>chainC <span class="ot">&lt;-</span> <span class="fu">gibbsC</span>(<span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">3</span>, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">N =</span> N)[(burn <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">:</span> N, ]</span></code></pre></div>
+<p>Use <span class="math inline">\(\texttt{qqplot}\)</span> to compare
+the random numbers generated in two methods.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="fu">qqplot</span>(chainR[ ,<span class="dv">1</span>], chainC[ ,<span class="dv">1</span>], <span class="at">xlab =</span> <span class="st">&quot;x(R)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;x(C)&quot;</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAY1BMVEUAAAAAADoAAGYAOjoAOpAAZrY6AAA6ADo6AGY6kNtmAABmADpmAGZmOpBmZmZmtttmtv+QOgCQOmaQZgCQ2/+2ZgC2/7a2///bkDrb2//b/9vb////tmb/25D//7b//9v////Pff4NAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAJNUlEQVR4nO2d64LaNhSEJ2l229Db0paEtl7w+z9lsQ0Ea5F0hI48k66/HyTC4zmD1paNEQb9ShKwA6gDdgB1wA6gDtgB1AE7gDpgB1AH7ADqgB1AHbADqAN2AHXADqAO2AHUATuAOmAHUAfsAOqAHUAdsAOoA3YAdcAOoA7YAdQBO4A6YAdQB+wA6oAdQB2wA6gDdgB1wA6gDtgB1AE7gDpgB1AH7ADqgB1AHbADqAN2AHXADqAO2AHUATuAOmAHUAfsAOqAHUAdsAOoA3YAdcAOoA7YAdQBO4A6YAdQB+wA6oAdQB2wA6gDdgB1wA6gDtgB1AE7gDpgB1AH7ADqgB1AHbADqAN2AHXADqAO2AHUATuAOmAHUAfsAOqAHUAdsAOoA3YAdcAOoA7YAdQBO4A6YAdQB+wA6oAdQB2wA6gDdgB1wA6gDtgB1AE7gDpwtvtuYHWQr50DYV+c23irjKzvmMXfrh7081C481zWwBFnu2pw8zhrI1SmHapzFO/aC4Gbx1kboTLt4IazXTW4eZy1ESrTDm4429WDfh2D0qxHsceAu5Bi1w64Cyl27YC7kGLXDrgLKXaPEIzKkXOzu09WCSl2DyZAtDl73uzniLPdowEQaYY6s6EbznaPBkCkGerMhm442z0aAJFmqDMbuuFs92ACRJuz581+jjjbPcJ6FHMB7kKKXTvgLqTYtQPuwpEd8HTcnnbrFxc7FyLXM3Jrme1Lsuw//Xvqo6e+P2w+O9i5gKBq2E6sZva3ctyeuqX78Fc/dVWtnQsIyobt9HrmAjYOm9Oe1X382l8ev7nQLtrj5vFeO72euYCNdQvKcR2Dxq6qtnMBvc4YtB7F6nG2awfchRS7dsBdSLFrB9yFFLu7JR4ac964uAspdpEKSLQLbHyFFLtYAUTbZT6eQopdrACi7TIfTyHFLlYA0XaZj6eQYhepgES7wMZXSLG7W2I9ii0B3IUUu3bAXUixawfKhd35klfsjbpvXTYoFB42w2WegeMW86uFbeqWeJo+CSw1LRMefrntk3mrTd0yS0SbNa6+Qord1RGRZqWtpzDt0u6iPW4e3zYrbQuEx+0wBr0+R641u9ctdESkWWlrFx4208cUl3+b1y2zRLRZ41oi3F36JfqZqXPdEk+Bo9jNxzixT7yc67JBmXD8zHSiqzgL+j930LctaO2ge8Ld0+WJHX0X87mekStSKHx9fgn+07hu2gKJtg9mx4uww7iT7VF3ImSum3FAtO2E2fAqHD9yx1NC6lo344Bo2wmzoXPlejsEPmHbCbOhc2UHO/SCY5DU5Q7Jo5jyBbMmoFy4XnKtE1Ls2oFi4fFvs3niZNJcN8Eic2XNJa7Cw2YahI5/REeg00B1JTJOmeumEznYGKoUCjsME3z3qSH6fLrddAuCk4+pTJlwOpdOvtWYLji+7SDHa9IIY7XBXOBWOPRQ7hi2O21m73UL2gG/b5G72nF6O9t2kIaPjaFKmfA0Ag97V5c9TXx9/uF9HsV+nTadxFHszGlPbNpBiwB3IcWuHXAXUuzaAXchxa4dcBe2s1vk8sabou7CZnYIVgvbbTBXMAtb2SFYL2w3wlzALGxlh2C9sN0IcwGzsJUdgvXCdiPMBczCZnbo1zEos856FBME7kKKXTvgLqTYtQPuQke7JnPqCjGXNAv97DDXBc2FMFc0C93sMBcGzaUwFzQL0y4FF+0xrxs0l8Jc0Cx0s8NcGDSXwlzQLPSzQ7+OQRnRehTTB+5Cil074C6k2LUD7sIKO8rb9QzmBGbh43YIng/bFMwBzMKH7RAsCNsczPXNwoftECwI2xzM9c3Ch+0QLAjbHMz1zcLH7dCvY1Dabj2KNbNrB9yFFLt2wF1IsWsH3IUj00TY6Czps53imBMCd+HA9fuIXWy2MHrRo1YI3IW96dv1UD3vCYG7sE99u/72mjQC37CtAdyF/boF5dlf5v+uY1CEy/d9otPxR7v3exRb3K4dcBca7b4bSB1kM80sr1tcu3qd3Mc0s7xu8dpBbd0r5T6mmeV1i9cOauteKfcxzSyvW7x2UFv3SrmPaWZ53eK1g9q6V8rfH2AHUAfsAOqAHUAdsAOoA3YAdcAOoA7YAdQBO4A6YAdQB+wA6oAdQB2wA6gDd8cO4+30YowzaNI3rU7dFP31OX1P5z0S92F7/emrIeEcWIVWhl8T7+L1j9vTsn3yNXaJ+6h1p0WXOz7eYz9Uj/XQYTP9FHw6YQCMOivTBIdd9CVMN4hL/bLAYRPvoMk9vvb0+zKR6t008SuXMABGnZV8Bwyk/oD7T39GO+j1x/QfPtVBHT6Pk3ZsCa/AJjMzvYTcj3Ps4stPBvExqPv4ZZMcwZK72BTLlvAKbDIz07aR2cWjs2emHSDeQeONVKfNJGqdGIDHXjEl/AZsMjOW8l1ijB5mZiU66EPmrz9smvGfuFLoIMMGnNh+ptUTHTT6xu8EmhlfFHax/BCY/OmO/XlySqQHppcVH6ozW4fCIJ09iO7z94SPb0HTNNL4X3968dHlncBhPncaZvkNvMSZ9DBE3cwlfbtqfgwinyiOe0nqLGfahZL5Um81uswblV1q+XnTSicMgFX4XgE7gDpgB1AH7ADqgB1AHbADqAN2AHXADqAO2AHUATuAOmAHUAfsAOqAHUAdsAOoA3YAdcAOoA7YAdQBO4A6YAdQB+wA6oAdQB2wA6gDdgB1wA6gDtgB1AE7gDpgB1AH7ABpjtuXy533Pvf94WfzR+puYPGKReyfLjPuxpmHXe6Hlv3B0gWLGOYDnTto/Oe0QS0dAUsXNDHM/zpsPo/zVS5zNsdJMbGby7UDC9ezMcyRGqdzPvWzLahg4pMXWLieke7jl9OAPGxElw6apu4lfsm9EVi4npXdMFV4nJJ4OYqNPTN22aJg4XpWxoPWuL2MW9Dr8zQQrR105rj9bRynX66DzzTzcO2gM/tP/5zG6dsxaDcOz+sYNDFsOsMh/uYodtgMR/j1KDaxG6dDP83Og8YZ+ut50JybGzTfbS8Ali5Yxn7+jYH1vVjI/M3X+m5eELADqAN2AHXADqAO2AHUATuAOmAHUAfsAOqAHUAdsAOoA3YAdcAOoA7YAdQBO4A6YAdQB+wA6oAdQB2wA6gDdgB1wA6gDtgB1PkPi7TDvfmEInQAAAAASUVORK5CYII=" /><!-- --></p>
+<p>Since <span class="math inline">\(X\)</span> is discrete, the qqplot
+of <span class="math inline">\(X\)</span> is of little reference
+significance, but the graph still supports the same distribution of the
+two sets of numbers.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="fu">qqplot</span>(chainR[ ,<span class="dv">2</span>], chainC[ ,<span class="dv">2</span>], <span class="at">xlab =</span> <span class="st">&quot;y(R)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;y(C)&quot;</span>)</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+<p>The points in Y’s qqplot are clearly distributed along the diagonal,
+which strongly supports that the distribution of Y in both data sets is
+the same.</p>
+<p>Lastly, we use <span class="math inline">\(\texttt{microbenchmark}\)</span> to compare the
+computation time of the two function.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="fu">library</span>(microbenchmark)</span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>ts <span class="ot">&lt;-</span> <span class="fu">microbenchmark</span>(<span class="at">gibbsR =</span> <span class="fu">gibbsR</span>(<span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">3</span>, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">N =</span> N),</span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a>                     <span class="at">gibbsC =</span> <span class="fu">gibbsC</span>(<span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">3</span>, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">N =</span> N))</span>
+<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a><span class="fu">summary</span>(ts)[ , <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>)]</span></code></pre></div>
+<pre><code>##     expr       lq   median       uq
+## 1 gibbsR 8.536951 8.714801 8.995202
+## 2 gibbsC 1.205652 1.213751 1.233001</code></pre>
+<p>From the obtained results, it can be seen that the computation time
+of gibbsC is about 1/15 of gibbR, which shows that Rcpp does have a
+significant advantage in computation speed, especially when there is a
+loop.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

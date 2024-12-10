@@ -1,0 +1,23 @@
+Package: SA24204176
+Type: Package
+Title: Three methods about mirror to cotrol FDR for linear regression models
+Version: 1.0
+Date: 2024-12-02
+Author: Jun Zhou
+Maintainer: Jun Zhou <zhoujun2020@mail.ustc.edu.cn>
+Description: Simultaneously finding multiple influential variables and 
+    controlling the false discovery rate (FDR) for linear regression 
+    models is a fundamental problem. This package provides three methods 
+    about mirror (Gaussian mirror, data splitting and its multiple version) 
+    to select features and control FDR at any nominal level.
+License: GPL (>= 2)
+Imports: Rcpp, knitr, stats, MASS, tree, boot, bootstrap, DAAG, parallel, microbenchmark, GM, DSfdr, glmnet
+Romotes: BioAlgs/GM, Jeremy690/DSfdr/DSfdr
+Suggests: rmarkdown
+VignetteBuilder: knitr
+LinkingTo: Rcpp
+RoxygenNote: 7.3.2
+Encoding: UTF-8
+NeedsCompilation: yes
+URL: http://github.com/zhoujunustc/SA24204176
+BugReports: http://github.com/zhoujunustc/SA24204176/issues

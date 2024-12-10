@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Jun Zhou" />
+
+<meta name="date" content="2024-12-02" />
+
+<title>Introduction to my R package</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to my R package</h1>
+<h4 class="author">Jun Zhou</h4>
+<h4 class="date">2024-12-02</h4>
+
+
+
+<div id="mirror" class="section level2">
+<h2>Mirror</h2>
+<p>Simultaneously finding multiple influential variables and controlling
+the false discovery rate (FDR) for linear regression models is a
+fundamental problem. For the linear regression model <span class="math inline">\(y = x_1&#39;\beta_1 + \ldots + x_p&#39;\beta_p +
+\varepsilon\)</span>, we are interested in testing <span class="math inline">\(p\)</span> hypotheses: <span class="math inline">\(H_j: \beta_j =0\)</span> for <span class="math inline">\(j=1,\ldots, p\)</span>, simultaneously and finding
+a statistical rule to decide which hypotheses should be rejected. Let
+<span class="math inline">\(S_0\subset\{1, 2,\ldots,p\}\)</span> index
+the set of “null” predictors, i.e., those with <span class="math inline">\(\beta_j =0\)</span>; and <span class="math inline">\(S_1 = S_0^c\)</span> indexes the set of relevant
+predictors. Let <span class="math inline">\(\hat S_1\)</span> be the set
+selected based on a statistical rule. The FDR for this statistical rule
+is defined as <span class="math display">\[FDR = \mathbb{E}[FDP], \quad
+FDP=\frac{\#\{i|i\in S_0,i\in \hat S_1\}}{\#\{i|i\in\hat S_1\}\vee
+1.}\]</span> The task is to controll the FDR at a designated level, say
+q.</p>
+<p>Making mirror is one of the effective ways to solve the above
+problem. Specifically, we constructs a test statistic <span class="math inline">\(M_j\)</span> for each feature <span class="math inline">\(x_j\)</span>, referred to as the “mirror
+statistic”, which should possess the following two key properties:</p>
+<ul>
+<li><p>(P1) A feature with a larger positive mirror statistic is more
+likely to be a relevant feature.</p></li>
+<li><p>(P2) The sampling distribution of the mirror statistic of any
+null feature is symmetric about zero.</p></li>
+</ul>
+<p>Property (P1) suggests that we can rank the importance of each
+feature by its mirror statistic, and select those features with mirror
+statistics larger than a cutoff. Property (P2) implies that we can
+estimate the number of false positives using the left tail of the
+distribution, that is,</p>
+<p><span class="math display">\[\#\{j\in S_0: M_j&gt;t\}\approx\#\{j\in
+S_0:M_j&lt;-t\}\approx\#\{j:M_j&lt;−t\},\;\;\forall t&gt;0.\]</span></p>
+<p>If we define <span class="math display">\[FDP(t)=\frac{\#\{j\in S_0:
+M_j&gt;t\}}{\#\{j: M_j&gt;t\}\vee 1},\]</span> then it can be estimated
+by <span class="math display">\[\widehat{FDP}(t)=\frac{\#\{j:
+M_j&lt;-t\}}{\#\{j: M_j&gt;t\}\vee 1}\]</span> For any designated FDR
+control level <span class="math inline">\(q\in (0,1)\)</span>, we can
+choose the data-driven cutoff <span class="math inline">\(\tau_q\)</span> as follows: <span class="math display">\[\tau_q = \min\{t&gt;0: \widehat{FDP}(t) ≤
+q\},\]</span> and the final selection is <span class="math inline">\(\hat S_{τ_q}=\{j:M_j &gt;τ_q\}\)</span>.</p>
+<p>Under a mild assumption on the dependence among the covariates, it
+can be shown that the FDR can be controlled at the level <span class="math inline">\(q\)</span> asymptotically.</p>
+<p>The selection function giving <span class="math inline">\(p\)</span>
+mirror statistics and the nominal level <span class="math inline">\(q\)</span> is implemented using Rcpp fonction as
+follow</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>IntegerVector Selection<span class="op">(</span>NumericVector M<span class="op">,</span> <span class="dt">double</span> q<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>q <span class="op">&lt;=</span> <span class="dv">0</span> <span class="op">||</span> q <span class="op">&gt;=</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    stop<span class="op">(</span><span class="st">&quot;Error: Invalid q value&quot;</span><span class="op">);</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="dt">double</span> FDP<span class="op">(</span><span class="dt">double</span> t<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="dt">int</span> num <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> den <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> M<span class="op">.</span>size<span class="op">();</span> j<span class="op">++){</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>M<span class="op">[</span>j<span class="op">]</span> <span class="op">&lt;=</span> <span class="op">-</span>t<span class="op">)</span> num<span class="op">++;</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>M<span class="op">[</span>j<span class="op">]</span> <span class="op">&gt;=</span>  t<span class="op">)</span> den<span class="op">++;</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    den <span class="op">=</span> den <span class="op">&gt;=</span> <span class="dv">1</span> <span class="op">?</span> den <span class="op">:</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">1.0</span> <span class="op">*</span> num <span class="op">/</span> den<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>  </span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="dt">double</span> tao <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span> <span class="dt">double</span> interval <span class="op">=</span> max<span class="op">(</span>M<span class="op">)</span> <span class="op">/</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(</span>FDP<span class="op">(</span>M<span class="op">,</span> tao<span class="op">)</span> <span class="op">&gt;</span> q<span class="op">)</span>  tao <span class="op">+=</span> interval<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>  </span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>  IntegerVector features<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>  </span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>  <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> M<span class="op">.</span>size<span class="op">();</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>M<span class="op">[</span>j<span class="op">]</span> <span class="op">&gt;=</span> tao<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>      features<span class="op">.</span>push_back<span class="op">(</span>j <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>    <span class="op">}</span> </span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>  <span class="cf">return</span> features<span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>This R package provides implementations of three mirror methods:
+Gaussian mirrors, data splitting and multiple data splitting.</p>
+<div id="gaussian-mirrors" class="section level3">
+<h3>Gaussian Mirrors</h3>
+<p>In Gaussian mirrors, we construct the <span class="math inline">\(j\)</span>-th Mirror by replacing <span class="math inline">\(x_j\)</span> with a pair of variables <span class="math inline">\((x_j^+, x_j^-)\)</span>with <span class="math inline">\(x_j^+ = x_j + c_jz_j\)</span> and <span class="math inline">\(x_j^- = x_j-c_jz_j\)</span>, where <span class="math inline">\(z_j\)</span> is an independently simulated
+Gaussian random vector with mean 0 and covariance <span class="math inline">\(I_n\)</span>. Denote <span class="math inline">\(X_{-j}\)</span> be the submatrix of the design
+matrix <span class="math inline">\(X\)</span> with the <span class="math inline">\(j\)</span>-th column removed, and <span class="math inline">\(c_j\)</span> is defined as follows, which results
+in a symmetric distribution of <span class="math inline">\(M_j\)</span>
+when <span class="math inline">\(j\in S_0\)</span>. <span class="math display">\[c_j=\sqrt{\frac{x_j&#39;(I_n-X_{-j}(X_{-j}&#39;X_{-j})^{-1}X_{-j})x_j}{z_j&#39;(I_n-X_{-j}(X_{-j}&#39;X_{-j})^{-1}X_{-j})z_j}}\]</span></p>
+<p>Now we have a new linear model <span class="math inline">\(y=x_j^+\beta_j^+ +x_j^-\beta_j^- +
+X_{-j}\beta_{-j}\)</span>. Obtain <span class="math inline">\(\hat\beta_j^+\)</span> and <span class="math inline">\(\hat\beta_j^-\)</span> using OLS, and calculate
+the mirror statistic by <span class="math inline">\(M_j=|\hat\beta_j^+ +
+\hat\beta_j^-|-|\hat\beta_j^+-\hat\beta_j^-|\)</span>.</p>
+<p>The function <em>GM</em> implements Guassian mirrors.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>Gaussian_Mirror <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X){</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y); p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X) </span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(y) <span class="sc">==</span> <span class="fu">nrow</span>(X), n <span class="sc">&gt;</span> p <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">scale</span>(X)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  </span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  GM_j <span class="ot">&lt;-</span> <span class="cf">function</span>(j){</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    zj <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    X_j <span class="ot">&lt;-</span> X[, <span class="sc">-</span>j, drop <span class="ot">=</span> <span class="cn">FALSE</span>] </span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    Nj <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>,n) <span class="sc">-</span> X_j <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">crossprod</span>(X_j)) <span class="sc">%*%</span> <span class="fu">t</span>(X_j) </span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    cj <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">sqrt</span>(<span class="fu">crossprod</span>(Nj <span class="sc">%*%</span> X[ ,j]) <span class="sc">/</span> <span class="fu">crossprod</span>(Nj <span class="sc">%*%</span> zj)))</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    xjp <span class="ot">&lt;-</span> X[ ,j] <span class="sc">+</span> cj <span class="sc">*</span> zj; xjn <span class="ot">&lt;-</span> X[ ,j] <span class="sc">-</span> cj <span class="sc">*</span> zj</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>    bj <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> xjp <span class="sc">+</span> xjn <span class="sc">+</span> X_j)<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>    Mj <span class="ot">&lt;-</span> <span class="fu">abs</span>(bj[<span class="dv">1</span>] <span class="sc">+</span> bj[<span class="dv">2</span>]) <span class="sc">-</span> <span class="fu">abs</span>(bj[<span class="dv">1</span>] <span class="sc">-</span> bj[<span class="dv">2</span>])</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>    <span class="fu">return</span>(Mj)</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  }</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  </span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  M <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>p, GM_j)</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="fu">names</span>(M) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  <span class="fu">return</span>(M)</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>}</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>GM <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X, q){</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  Mirror_stat <span class="ot">&lt;-</span> <span class="fu">Gaussian_Mirror</span>(y, X)</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>  feature <span class="ot">&lt;-</span> <span class="fu">Selection</span>(Mirror_stat, q)</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>  <span class="fu">names</span>(feature) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)[feature]</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">feature=</span>feature, <span class="at">mirror_statistic =</span> Mirror_stat))</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="data-splitting" class="section level3">
+<h3>Data Splitting</h3>
+<p>In data splitting, we split the <span class="math inline">\(n\)</span> observations by half into two groups,
+denoted as <span class="math inline">\((y^{(1)}, X^{(1)})\)</span>,and
+<span class="math inline">\((y^{(2)}, X^{(2)})\)</span>, and then
+estimate <span class="math inline">\(\hat\beta^{(1)}\)</span> and <span class="math inline">\(\hat\beta^{(2)}\)</span> with OLS using each part
+of the data. Then the mirror statistic is structed as <span class="math display">\[M_j=\textrm{sign}(\hat\beta^{(1)}_j\hat\beta^{(2)}_j)(\hat\beta^{(1)}_j+\hat\beta^{(2)}_j).\]</span></p>
+<p>The function <em>DS</em> implements data splitting.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>Data_split <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X){</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(y); p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X) </span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(y) <span class="sc">==</span> <span class="fu">nrow</span>(X), <span class="fu">round</span>(n<span class="sc">/</span><span class="dv">2</span>) <span class="sc">&gt;</span> p)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">scale</span>(X)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  </span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  group1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(n, <span class="fu">round</span>(n<span class="sc">/</span><span class="dv">2</span>)) </span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  X1 <span class="ot">&lt;-</span> X[ group1, ]; y1 <span class="ot">&lt;-</span> y[ group1, ]</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  X2 <span class="ot">&lt;-</span> X[<span class="sc">-</span>group1, ]; y2 <span class="ot">&lt;-</span> y[<span class="sc">-</span>group1, ]</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  beta1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y1 <span class="sc">~</span> X1)<span class="sc">$</span>coefficient[<span class="sc">-</span><span class="dv">1</span>] </span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  beta2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y2 <span class="sc">~</span> X2)<span class="sc">$</span>coefficient[<span class="sc">-</span><span class="dv">1</span>] </span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  M <span class="ot">&lt;-</span> <span class="fu">sign</span>(beta1 <span class="sc">*</span> beta2) <span class="sc">*</span> (<span class="fu">abs</span>(beta1) <span class="sc">+</span> <span class="fu">abs</span>(beta2))</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>  <span class="fu">names</span>(M) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>  <span class="fu">return</span>(M)</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>}</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>DS <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X, q){</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>  Mirror_stat <span class="ot">&lt;-</span> <span class="fu">Data_split</span>(y, X)</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>  feature <span class="ot">&lt;-</span> <span class="fu">Selection</span>(Mirror_stat, q)</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  <span class="fu">names</span>(feature) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)[feature]</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">feature=</span>feature, <span class="at">mirror_statistic =</span> Mirror_stat))</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="multiple-data-splitting" class="section level3">
+<h3>Multiple Data Splitting</h3>
+<p>In order to remedy the issue of DS that may not be stable and can
+vary substantially across different sample splits, we independently
+repeat DS <span class="math inline">\(m\)</span> times with random
+sample splits. Each time the set of the selected features is denoted as
+<span class="math inline">\(\hat S^{(k)}\)</span> for <span class="math inline">\(k\in\{1,\ldots, m\}\)</span>. For each feature
+<span class="math inline">\(X_j\)</span>, we define the associated
+inclusion rate <span class="math inline">\(I_j\)</span> and its estimate
+<span class="math inline">\(\hat I_j\)</span> as</p>
+<p><span class="math display">\[I_j=\mathbb{E}\left[\frac{\mathbb{1}(j\in\hat
+S)}{|\hat S|\vee1}\Bigg|X,y\right],\quad \hat
+I_j=\frac{1}{m}\sum_{k=1}^m\frac{\mathbb{1}(j\in\hat S^{(k)})}{|\hat
+S^{(k)}|\vee1}.\]</span> in which the expectation is taken with respect
+to the randomness in data splitting.</p>
+<p>MDS ranks the importance of features by their inclusion rates,
+because if a feature is selected less frequently in repeated sample
+splitting, it is less likely to be a relevant feature. Therefore, we
+first sort the estimated inclusion rates: <span class="math inline">\(0
+\leq \hat I_{(1)} \leq \hat I_{(2)} \leq \ldots \leq \hat
+I_{(p)}\)</span>, then for a nominal FDR level <span class="math inline">\(q\in(0, 1)\)</span>, find the largest <span class="math inline">\(l\in\{1,\ldots,p\}\)</span> such that <span class="math inline">\(\hat I_{(1)} +· · · +\hat I_{(l)} \leq q\)</span>,
+and finally select the features<span class="math inline">\(\hat S
+=\{j:\hat I_j &gt;\hat I_{(l)}\}\)</span>.</p>
+<p>The function <em>MDS</em> implements multiple data splitting.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>MDS <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X, q, <span class="at">m=</span><span class="dv">50</span>){</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  inclusion_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, m, p)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">colnames</span>(inclusion_mat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    inclusion_mat[k, <span class="fu">DS</span>(y, X, q)<span class="sc">$</span>feature] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  }</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  IR <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(inclusion_mat <span class="sc">/</span> <span class="fu">pmax</span>(<span class="fu">rowSums</span>(inclusion_mat), <span class="dv">1</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">feature =</span> <span class="fu">which</span>(IR <span class="sc">&gt;=</span> <span class="fu">sort</span>(IR)[<span class="fu">cumsum</span>(<span class="fu">sort</span>(IR)) <span class="sc">&gt;</span> q][<span class="dv">1</span>]),</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>              <span class="at">inclusion_rate =</span> IR))</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<div id="generating-data" class="section level3">
+<h3>Generating data</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span>; p <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span>, p, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">1</span>, .<span class="dv">5</span>, .<span class="dv">2</span>, .<span class="dv">1</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> p), n, p)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>y <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span></code></pre></div>
+</div>
+<div id="selecting-features" class="section level3">
+<h3>Selecting features</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>GM.fit <span class="ot">&lt;-</span> <span class="fu">GM</span>(y, X, q)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>DS.fit <span class="ot">&lt;-</span> <span class="fu">DS</span>(y, X, q)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>MDS.fit <span class="ot">&lt;-</span> <span class="fu">MDS</span>(y, X, q, <span class="at">m =</span> <span class="dv">50</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="dv">7</span>, p)</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="fu">colnames</span>(res) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, <span class="dv">1</span><span class="sc">:</span>p)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="fu">rownames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;true&quot;</span>, <span class="st">&quot;myGM&quot;</span>, <span class="st">&quot;theGM&quot;</span>, <span class="st">&quot;myDS&quot;</span>, <span class="st">&quot;theGS&quot;</span>, <span class="st">&quot;myMDS&quot;</span>, <span class="st">&quot;theMDS&quot;</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>res[<span class="dv">1</span>, beta <span class="sc">!=</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>res[<span class="dv">2</span>, GM.fit<span class="sc">$</span>feature] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>res[<span class="dv">3</span>, GM<span class="sc">::</span><span class="fu">gm</span>(y, X, q)<span class="sc">$</span>gm_selected] <span class="ot">&lt;-</span> <span class="dv">1</span></span></code></pre></div>
+<pre><code>## Generate Gaussian mirrors... ...Calculate mirror statistics ... ...</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>res[<span class="dv">4</span>, DS.fit<span class="sc">$</span>feature] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>res[<span class="dv">5</span>, DSfdr<span class="sc">::</span><span class="fu">DS</span>(X, y, <span class="dv">1</span>, q)<span class="sc">$</span>DS_feature] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>res[<span class="dv">6</span>, MDS.fit<span class="sc">$</span>feature] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>res[<span class="dv">7</span>, DSfdr<span class="sc">::</span><span class="fu">DS</span>(X, y, <span class="dv">50</span>, q)<span class="sc">$</span>MDS_feature] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(res)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">x1</th>
+<th align="right">x2</th>
+<th align="right">x3</th>
+<th align="right">x4</th>
+<th align="right">x5</th>
+<th align="right">x6</th>
+<th align="right">x7</th>
+<th align="right">x8</th>
+<th align="right">x9</th>
+<th align="right">x10</th>
+<th align="right">x11</th>
+<th align="right">x12</th>
+<th align="right">x13</th>
+<th align="right">x14</th>
+<th align="right">x15</th>
+<th align="right">x16</th>
+<th align="right">x17</th>
+<th align="right">x18</th>
+<th align="right">x19</th>
+<th align="right">x20</th>
+<th align="right">x21</th>
+<th align="right">x22</th>
+<th align="right">x23</th>
+<th align="right">x24</th>
+<th align="right">x25</th>
+<th align="right">x26</th>
+<th align="right">x27</th>
+<th align="right">x28</th>
+<th align="right">x29</th>
+<th align="right">x30</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">true</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">myGM</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">theGM</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">myDS</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">theGS</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">myMDS</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">theMDS</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="benchmarking" class="section level3">
+<h3>Benchmarking</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(microbenchmark)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>ts <span class="ot">&lt;-</span> <span class="fu">microbenchmark</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="at">myGM   =</span> <span class="fu">GM</span>(y, X, q),</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="at">theGM  =</span> GM<span class="sc">::</span><span class="fu">gm</span>(y, X, q),</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="at">myDS   =</span> <span class="fu">DS</span>(y, X, q),</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="at">theDS  =</span> DSfdr<span class="sc">::</span><span class="fu">DS</span>(X, y, <span class="dv">1</span>, q),</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="at">myMDS  =</span> <span class="fu">MDS</span>(y, X, q),</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  <span class="at">theMDS =</span> DSfdr<span class="sc">::</span><span class="fu">DS</span>(X, y, <span class="dv">50</span>, q),</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  <span class="at">times  =</span> <span class="dv">20</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...Generate Gaussian mirrors... ...Calculate mirror statistics ... ...</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">summary</span>(ts)[ , <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>)]</span></code></pre></div>
+<pre><code>##     expr          lq      median          uq
+## 1   myGM 1151.310952 1202.721601 1265.184101
+## 2  theGM 1868.657901 1902.379551 2001.971801
+## 3   myDS    4.669752    5.984151    6.784502
+## 4  theDS   60.952501   66.631701   74.020801
+## 5  myMDS  272.545801  286.041751  316.655051
+## 6 theMDS 3142.261451 3302.012001 3472.825951</code></pre>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
